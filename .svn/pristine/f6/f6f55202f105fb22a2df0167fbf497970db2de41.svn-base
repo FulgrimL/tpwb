@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>在这保</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <!--App自定义的css-->
+    <!-- <link rel="stylesheet" type="text/css" href="../css/app.css" /> -->
+    <style>
+        h5 {
+            margin: 5px 7px;
+        }
+        body {
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script>
+        setMeta = function () {
+            var iScale = 1;
+            // iScale = iScale / window.devicePixelRatio;
+            //   无限适配——去掉标注（达到设计稿效果）  750px设计稿下cssrem-user配置 （50） html font-size：50px/16px；
+            // 要求移动端有最大宽度， 注释掉之后， css内添加max - width： 750 px
+            var metaDom = document.createElement('meta');
+            metaDom.name = "viewport";
+            metaDom.content = 'width=device-width,user-scalable=no,initial-scale=' + iScale + ',minimum-scale=' + iScale +
+                ',maximum-scale=' + iScale;
+            document.getElementsByTagName('head')[0].appendChild(metaDom);
+            var iWidth = document.documentElement.clientWidth;
+            document.getElementsByTagName('html')[0].style.fontSize = iWidth / 16 + "px";
+            console.log(iScale);
+        };
+    </script>
+    <script>
+        setMeta();
+    </script>
+
+</head>
+
+<body>
+<!--<header class="mui-bar mui-bar-nav">
+
+        <h1 class="mui-title">身份绑定</h1>
+    </header>-->
+<div class="mui-content">
+    <div class="mui-content-padded" style="margin: 0px;">
+
+        <form class="mui-input-group">
+            <div style="width: 8rem;height: 2.4rem;color:#8C8C8C;line-height: 2.4rem;font-size: 1.2rem;margin-left: 4%;">
+                解除绑定
+            </div>
+
+            <div class="mui-input-row">
+                <label style="width: 20%;">工号：</label>
+                <label id="txt_userCode" type="text" class="mui-input-clear"  style="float: left;"></label>
+            </div>
+            <div class="mui-input-row">
+                <label style="width: 20%;">手机号：</label>
+                <label id="txt_phone" type="text" class="mui-input-clear"  style="float: left;"></label>
+            </div>
+            <br>
+            <div id="div_tip" style="color:red;margin: 5px;height: 10px;font-size: small;"></div>
+            <button type="button" id="btn_unbind" class="mui-btn mui-btn-success mui-btn-block"
+                    style="background: rgba(79, 176, 90, 1);height: 50px;">解除绑定
+            </button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="../js/jslib/jquery-3.3.1.js"></script>
+<script src="../js/mui.js"></script>
+<script src="../js/jslib/common.js"></script>
+<script>
+    mui.init();
+    $(function () {
+        var sale_jobnumber= localStorage.getItem("sale_jobnumber");
+        var sale_phone= localStorage.getItem("sale_phone");
+        document.getElementById("txt_userCode").innerText=sale_jobnumber;
+        document.getElementById("txt_phone").innerText=sale_phone;
+       /* $("txt_phone").innerText=sale_phone;*/
+        $("#btn_unbind").click(function () {
+                var btnArray = ['否', '是'];
+                mui.confirm('确定解除绑定？', '解除绑定', btnArray, function(e) {
+                    if (e.index == 1) {
+                        $.ajax({
+                            url: httpLocation2+/tpwb/tpuser/logOut" ,
+                            type: 'get',
+                            data: {
+                                sale_jobnumber: sale_jobnumber
+                            },
+                            dataType: 'JSON',
+                            success: function (backData) {
+                                if (backData.code == 0) {
+                                    mui.toast("解绑成功！");
+                                    localStorage.clear();
+                                    window.location.href="login.html";
+                                } else {
+                                    mui.toast("解绑失败！");
+                                }
+                            }
+                            }
+                        );
+                    } else {
+
+                    }
+                })
+        });
+    });
+</script>
+</body>
+
+</html>

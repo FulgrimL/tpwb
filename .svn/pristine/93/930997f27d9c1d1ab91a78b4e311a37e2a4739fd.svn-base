@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>产品介绍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" href="../css/weui.min.css">
+    <link rel="stylesheet" href="../css/jquery-weui.css">
+    <link rel="stylesheet" href="../css/demos.css">
+
+</head>
+
+<body>
+
+<style>
+    @font-face {
+        font-family: 'iconfont';
+        /* project id 887339 */
+        src: url('//at.alicdn.com/t/font_887339_vbd9pny8y2k.eot');
+        src: url('//at.alicdn.com/t/font_887339_vbd9pny8y2k.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_887339_vbd9pny8y2k.woff') format('woff'), url('//at.alicdn.com/t/font_887339_vbd9pny8y2k.ttf') format('truetype'), url('//at.alicdn.com/t/font_887339_vbd9pny8y2k.svg#iconfont') format('svg');
+    }
+
+    .iconfont {
+        margin-left: 20px;
+        margin-right: 5px;
+        height: 100%;
+        float: left;
+        font-family: "iconfont" !important;
+        font-size: 18px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    html {
+        font-size: 16px;
+        touch-action: none;
+    }
+
+    body {
+        font-family: "微软雅黑";
+        opacity: 1;
+        /* font-size: 16px; */
+        font-weight: R;
+        color: rgba(48, 46, 51, 1);
+        letter-spacing: 0px;
+        background-color: white;
+    }
+
+    .buyDetail {
+        margin: 0 10px;
+        border: 1px solid rgba(79, 176, 90, 1);
+        height: 32px;
+        padding: 0 5px;
+    }
+
+    .buyDetail span {
+        font-size: 16px;
+        float: left;
+        line-height: 30px;
+        height: 30px;
+    }
+
+    .buyDetail a {
+        color: black;
+        font-size: 16px;
+        float: right;
+        line-height: 30px;
+        height: 30px;
+    }
+
+    #wrapper {
+        height: 100%;
+        width: 130px;
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    #sale_phone {
+        position: absolute !important;
+        width: 250px;
+        -webkit-animation: sale_phone 5s linear 0s infinite;
+    }
+
+    @-webkit-keyframes sale_phone {
+        0% {
+            right: 0px;
+            top: 0px;
+        }
+        47% {
+            right: 220px;
+            top: 0px;
+        }
+        48% {
+            right: 220px;
+            top: 100px;
+        }
+        49% {
+            right: -250px;
+            top: 100px;
+        }
+        50% {
+            right: -250px;
+            top: 0px;
+        }
+        100% {
+            right: 0px;
+            top: 0px;
+        }
+    }
+
+    .proname {
+        float: left;
+        height: 30px;
+        line-height: 30px;
+        font-size: 16px;
+        display: inline-block !important;
+        margin: 0 !important;
+        z-index: 999;
+    }
+
+    .mui-backdrop img {
+        width: 75vw;
+        height: 75vw;
+        margin: auto;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .mui-content {
+        background-color: white;
+    }
+
+    .mui-control-content {
+        background-color: white;
+        min-height: 215px;
+    }
+
+    .mui-card-content img {
+        width: 100%;
+    }
+
+    .mui-control-content .mui-loading {
+        margin-top: 50px;
+    }
+
+    .mui-segmented-control-negative.mui-segmented-control-inverted .mui-control-item.mui-active {
+        color: rgba(79, 176, 90, 1);
+    }
+
+    .mui-segmented-control-negative.mui-segmented-control-inverted ~ .mui-slider-progress-bar {
+        background-color: rgba(79, 176, 90, 1);
+    }
+
+    #app {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    #item1mobile {
+        border-bottom: none;
+    }
+
+    #item2mobile {
+        border-bottom: none;
+        border-top: none;
+    }
+
+    #item3mobile {
+        border-bottom: none;
+    }
+
+    .botTitle {
+        background-color: white;
+        width: 100%;
+        height: 85px;
+        margin-bottom: 44px;
+        padding-bottom: 5px;
+        margin-top: 15px;
+    }
+
+    .botTitle p {
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+
+    .botimg {
+        height: 40px;
+        text-align: center;
+        margin: 0 auto;
+        width: 90px;
+    }
+
+    .botimg img {
+        height: 100%;
+        width: 100%;
+    }
+
+    #item3mobile {
+        background-color: white;
+    }
+
+    .scopeOfInsured {
+        padding: 5px 15px;
+    }
+
+
+
+    .MsoNormal {
+        opacity: 1;
+        font-size: 12px;
+        font-weight: R;
+        color: rgba(48, 46, 51, 1);
+        line-height: 16px;
+        letter-spacing: 0px;
+    }
+
+    .mui-view {
+        width: 100%;
+        height: 17px;
+        opacity: 1;
+        background: rgba(79, 176, 90, 1);
+        border: 0.694444px solid rgba(79, 176, 90, 1);
+        border-radius: 3.47222px 3.47222px 3.47222px 3.47222px;
+        font-size: 10px;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+
+    .mui-btn-success {
+        opacity: 1;
+        background: rgba(79, 176, 90, 1);
+        font-size: 18px;
+        font-family: "微软雅黑";
+        font-weight: R;
+        color: rgba(255, 255, 255, 1);
+        line-height: 12px;
+        letter-spacing: 0px;
+        height: 51px;
+    }
+    .div2-left {
+        display: inline;
+        float: left;
+        width: 20%;
+    }
+
+    .div1-left {
+        display: inline;
+        float: left;
+        width: 70%;
+    }
+
+    .div2-right {
+        text-align: right;
+    }
+
+    .div1-right {
+        text-align: right;
+    }
+    .MsoNormalTitle {
+        color: red;
+    }
+
+</style>
+<div class="mui-content" style="position:absolute; overflow: auto;margin-bottom: 80px; ">
+    <div id="slider-pic" class="mui-slider">
+        <!--顶部图片的展示，可轮播。-->
+        <div class="mui-slider-group mui-slider-loop">
+            <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+            <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="#">
+                    <img class="img-card" src="../images/product/time.jpg">
+                </a>
+            </div>
+            <!-- 第一张 -->
+            <div class="mui-slider-item">
+                <a href="#">
+                    <img class="img-card" src="../images/product/card.png">
+                </a>
+            </div>
+            <!-- 第二张 -->
+            <div class="mui-slider-item">
+                <a href="#">
+                    <img class="img-card" src="../images/product/time.jpg">
+                </a>
+            </div>
+            <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+            <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="#">
+                    <img class="img-card" src="../images/product/card.png">
+                </a>
+            </div>
+        </div>
+        <div class="mui-slider-indicator">
+            <div class="mui-indicator mui-active"></div>
+            <div class="mui-indicator"></div>
+        </div>
+    </div>
+    <div id="slider" class="mui-slider">
+        <div id="sliderSegmentedControl" style="font-size: 16px;"
+             class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-negative">
+            <a class="mui-control-item mui-active" href="#item1mobile">
+                保障范围
+            </a>
+            <a class="mui-control-item" href="#item2mobile">
+                产品介绍
+            </a>
+            <a class="mui-control-item" href="#item3mobile">
+                理赔流程
+            </a>
+        </div>
+        <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content mui-active" style="border:none;">
+                <div id="scroll1"></div>
+                <div id="scopeOfInsured" class="mui-scroll">
+                    <!--<ul class="mui-table-view">-->
+                    <!--<li class="mui-table-view-cell">-->
+                    <!--<div class="div1-left">-->
+                    <!--意外伤害身故保障-->
+                    <!--</div>-->
+                    <!--<div class="div1-right">-->
+                    <!--10000元-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="mui-table-view-cell">-->
+                    <!--<div class="div1-left">-->
+                    <!--意外伤害身故保障-->
+                    <!--</div>-->
+                    <!--<div class="div1-right">-->
+                    <!--10000元-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<div class="scopeOfInsured">-->
+                    <!--<p>免赔条款:</p>-->
+                    <!--<div>详见投保须知</div>-->
+                    <!--</div>-->
+                    <!--<div class="scopeOfInsured">-->
+                    <!--<p>特别约定:</p>-->
+                    <!--<div>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;1.在本合同所指的交通意外伤害是指，被保险人驾驶或搭乘非非营运机动车、搭乘运营类机动车、民航飞机、轨道交通工具、水上交通工具时遭遇意外伤害，本公司按合同约定给付身故保险金。-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;2.本合同不承保“公共交通工具驾驶人员及乘务人员、货车司机及随车人员、出租车司机”等人群，如果上述人群发生保险事故的，保险人不承担保险责任。-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;3.对于。。。-->
+                    <!--</p>-->
+                    <!--</div>-->
+
+                    <!--</div>-->
+                </div>
+            </div>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+
+                <!-- <div id="productOverview">
+                    <p>特别约定:</p>
+                    <div>出行拥有百万身价，无论到哪，安全与您相伴！</div>
+                </div> -->
+
+                <div id="productIntro" class="mui-scroll">
+
+                    <!--<li class="mui-table-view-cell">-->
+                    <!--<div class="div2-left">-->
+                    <!--年龄范围-->
+                    <!--</div>-->
+                    <!--<div class="div2-right">-->
+                    <!--年龄在18至65周岁(含65周岁)-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="mui-table-view-cell">-->
+                    <!--<div style=" display:inline; float:left;width: 20%;">-->
+                    <!--保障对象-->
+                    <!--</div>-->
+                    <!--<div style="text-align: right;">-->
+                    <!--身体健康者，从事本公司职业分类1-3类的，可作为被保险人参加本保险-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="mui-table-view-cell">-->
+                    <!--<div style=" display:inline; float:left;width: 20%;">-->
+                    <!--保障期限-->
+                    <!--</div>-->
+                    <!--<div class="" style="text-align: right;">-->
+                    <!--一年-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="mui-table-view-cell">-->
+                    <!--<div style=" display:inline; float:left;width: 20%;">-->
+                    <!--限购件数-->
+                    <!--</div>-->
+                    <!--<div style="text-align: right;">-->
+                    <!--每人限投保壹份，多投无效-->
+                    <!--</div>-->
+                    <!--</li>-->
+
+
+                </div>
+            </div>
+            <div id="item3mobile" class="mui-slider-item mui-control-content" style="border:none">
+                <div id="repairRegulation" class="mui-card-content"
+                     style="box-sizing:border-box;padding:10px;background-color:white">
+                    <!--<p class="MsoNormalTitle">-->
+                    <!--<b style="color: red;">【理赔须知】</b>-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--一、为了保护被保险人的利益，请您务必于保险事故发生后的24小时内向我公司报案，否则我公司将收取因延迟报案而增加的查勘费用并可能拒赔，全国统一服务电话：95519。-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--二、因履行本保险发生的争议，由当事人协商解决，协商不成的，提交当地人民法院诉讼解决-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--三、保险金申请所需证明和资料：-->
+
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;1．被保险人身份证明（户口簿、身份证或学籍证明）；-->
+
+                    <!--</p>-->
+
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;2．申请人身份证明、关系证明和转账资料；-->
+
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;3．医学死亡证明、户籍注销证明、殡葬证明（提供三项中的两项）；-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;4. 本公司认可或本公司指定的鉴定机构出具的鉴定报告或本公司认可或指定的二级以上医疗机构出具的医学诊断证明、手术记录、检查报告等医疗证明文件资料；-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;5.诊断证明和出院记录；-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;6. 住院（门诊）发票、社保报销审核单、医疗费用明细清单；-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;7. 门诊病历；-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;8. 本公司要求申请人提供的能够确认保险事故的性质、原因等相关的其他证明材料。-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;其中身故保险金所需：1、2、3、8-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;伤残保险金：1、2、4、8-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;&nbsp;意外医疗保险金：1、2、5、6、7、8-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;住院医疗保险金：1、2、5、6、8-->
+                    <!--</p>-->
+                    <!--<p class="MsoNormal">-->
+                    <!--&nbsp;注：若由代理人代为提交代理材料的，还应提供被保险人本人或其法定监护人出具的授权委托书、代理人法定身份证明等文件。-->
+                    <!--</p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="app" class="mui-views" style="position:fixed;bottom:0;background-color: white;width: 100%;">
+    <div id="div-bottom">
+        <div class="buyDetail">
+            <i class="iconfont">&#xe663;</i>
+            <div id="wrapper">
+                <div class="proname mar" id="sale_phone" href="tel:13333333333">客户经理<span id="sale_name"></span>为您服务
+                </div>
+            </div>
+            <a id="sale_phone_a" href="tel:13333333333"><i class="iconfont">&#xe61b;</i></a>
+        </div>
+        <div id="div-btu" style="text-align: center;padding: 0 10px;margin-top: 5px; background-color: white;">
+            <button type="button" class="mui-btn mui-btn-success mui-btn-block btu-sub ">立即下单</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/jslib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/jslib/mui.min.js"></script>
+<script src="../js/jslib/mui.picker.min.js"></script>
+<script type="text/javascript" src="../js/card.js"></script>
+<script src="../js/base64.js"></script>
+<script src="../js/common.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/immersed.js"></script>
+<script type="text/javascript" src="../js/jslib/common.js"></script>
+<script src="../js/jquery-2.1.4.js"></script>
+<script src="../js/fastclick.js"></script>
+<script src="../js/jquery-weui.js"></script>
+<script src="../js/swiper.js"></script>
+<script src="../js/jslib/common.js"></script>
+<script>
+    mui.init();
+    var ProductId = getQueryString("ProductId");
+    var GsuserId = getQueryString("GsuserId");
+    var CustomerId = getQueryString("CustomerId");
+    var postData = {
+        ProductId: ProductId,
+        GsuserId: GsuserId,
+        CustomerId: CustomerId
+    };
+    $(function () {
+        $.ajax({
+            url: httpLocation2+"/tpwb/product/productDetail",
+            type: 'GET',
+            dataType: 'json',
+            data: postData,
+            success: function (backData) {
+                if (backData.code == 0) {
+                    var resDate = backData.data;
+                    $("#sale_name").html(resDate.sale_name);
+
+                    var temp = document.getElementById("sale_phone");
+                    temp.setAttribute("href", "tel:" + resDate.sale_phone);
+                    temp = document.getElementById("sale_phone_a");
+                    temp.setAttribute("href", "tel:" + resDate.sale_phone);
+
+                    var productIntro = (resDate.productIntro).split("。");
+                    var strHtml = '<ul id="productIntro" class="mui-table-view">';
+                    for (var i in productIntro) {
+                        var str = productIntro[i].split("：");
+                        strHtml += '<li class="mui-table-view-cell">' +
+                            '<div class="div2-left">' + str[0] + '</div> ' +
+                            '<div class="div2-right">' + str[1] + '</div>' +
+                            '</li>';
+                    }
+                    strHtml += '</ul>'
+                    temp = document.getElementById("productIntro");
+                    temp.innerHTML = strHtml;
+
+                    strHtml = "";
+                    var repairRegulation = (resDate.repairRegulation).split("；");
+                    strHtml += '<p class="MsoNormalTitle"> <b>' + repairRegulation[0] + '</b></p>';
+                    var rp = repairRegulation[1].split("。");
+                    for (var i in rp) {
+                        strHtml += '<p class="MsoNormal">' + rp[i] + '。</p>';
+                    }
+                    temp = document.getElementById("repairRegulation");
+                    temp.innerHTML = strHtml;
+
+                    strHtml = "";
+                    var scopeOfInsured = (resDate.scopeOfInsured).split("；");
+                    var soi = scopeOfInsured[0].split("。");
+                    strHtml += '<ul  class="mui-table-view">';
+                    for (var i in soi) {
+                        str = soi[i].split("：");
+                        strHtml += '<li class="mui-table-view-cell">' +
+                            '<div class="div1-left">' + str[0] + '</div>' +
+                            '<div class="div1-right">' + str[1] + '</div>' +
+                            '</li>';
+                    }
+                    strHtml += '</ul>';
+                    var soi = scopeOfInsured[1].split("！");
+                    for (var i in soi) {
+                        str = soi[i].split("：");
+                        strHtml += ' <div class="scopeOfInsured">' + '<p>' + str[0] + ':</p><div>';
+                        var str1 = str[1].split("。");
+                        for (var i in str1) {
+                            strHtml += '<p class="MsoNormal">' + str1[i] + '。</p>';
+                        }
+                        strHtml += '</div></div>';
+                    }
+                    //console.log(strHtml);
+                    temp = document.getElementById("scopeOfInsured");
+                    temp.innerHTML = strHtml;
+                }
+            }
+        });
+    });
+
+    //获取链接后面的参数
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>在这保</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <!--App自定义的css-->
+    <!-- <link rel="stylesheet" type="text/css" href="../css/app.css" /> -->
+    <style>
+        h5 {
+            margin: 5px 7px;
+        }
+
+        body {
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script>
+        setMeta = function () {
+            var iScale = 1;
+            // iScale = iScale / window.devicePixelRatio;
+            //   无限适配——去掉标注（达到设计稿效果）  750px设计稿下cssrem-user配置 （50） html font-size：50px/16px；
+            // 要求移动端有最大宽度， 注释掉之后， css内添加max - width： 750 px
+            var metaDom = document.createElement('meta');
+            metaDom.name = "viewport";
+            metaDom.content = 'width=device-width,user-scalable=no,initial-scale=' + iScale + ',minimum-scale=' + iScale +
+                ',maximum-scale=' + iScale;
+            document.getElementsByTagName('head')[0].appendChild(metaDom);
+            var iWidth = document.documentElement.clientWidth;
+            document.getElementsByTagName('html')[0].style.fontSize = iWidth / 16 + "px";
+            // console.log(iScale);
+        };
+    </script>
+    <script>
+        setMeta();
+    </script>
+    <script src="../js/jslib/common.js"></script>
+
+</head>
+
+<body>
+<!--<header class="mui-bar mui-bar-nav">
+
+        <h1 class="mui-title">身份绑定</h1>
+    </header>-->
+<div class="mui-content">
+    <div class="mui-content-padded" style="margin: 0px;">
+
+        <form class="mui-input-group">
+            <div style="width: 8rem;height: 2.4rem;color:#8C8C8C;line-height: 2.4rem;font-size: 1.2rem;margin-left: 4%;">
+                身份绑定
+            </div>
+
+            <div class="mui-input-row">
+                <label style="width: 23%;">工号</label>
+                <input id="txt_userCode" type="text" class="mui-input-clear" placeholder="请输入工号" style="float: left;">
+            </div>
+            <div class="mui-input-row">
+                <label style="width: 23%;">手机号</label>
+                <input id="txt_phone" type="text" class="mui-input-clear" placeholder="请输入手机号" style="float: left;">
+            </div>
+            <div class="mui-input-row">
+
+                <input id="txt_validateCode" style="width: 65%" type="text" placeholder="验证码">
+                <button id="btu_validateCode" style="width: 35%;line-height:1.3" type="button"
+                        class="mui-btn mui-btn-success mui-btn-outlined">
+                    获取验证码
+                </button>
+            </div>
+            <br>
+            <div id="div_tip" style="color:red;margin: 5px;height: 10px;font-size: small;"></div>
+            <button type="button" id="btn_login" class="mui-btn mui-btn-success mui-btn-block"
+                    style="background: rgba(79, 176, 90, 1);height: 50px;">确定
+            </button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="../js/jslib/jquery-3.3.1.js"></script>
+<script src="../js/mui.min.js"></script>
+<script>
+    mui.init();
+    var interValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount; //当前剩余秒数
+    var url=httpLocation2;
+
+    $(function () {
+        $("#btn_login").click(function () {
+            if (!checkUserCode()) {
+                return;
+            }
+            if (!checkPhone()) {
+                return;
+            }
+            if (!checkCode()) {
+                return;
+            }
+            if ($("#txt_userCode").val() && $("#txt_phone").val() && $("#txt_validateCode").val()) {
+                login();
+            } else {
+                alert("数据格式不正确！");
+            }
+        });
+        $("#btu_validateCode").click(function () {
+            if (!checkPhone()) {
+                return;
+            } else {
+                getValidateCode();
+            }
+        });
+        //失去焦点之后，先验证手机号格式是否正确，再验证手机号是否绑定
+        $("#txt_phone").blur(function () {
+            var phone = $("#txt_phone").val();
+            if (phone.trim() == "" && $("#txt_phone").val().trim() == "") {
+                return;
+            }
+            if (!(/^1[34578]\d{9}$/.test(phone))) {
+
+                $("#div_tip").html("联系电话格式不正确");
+                document.getElementById("txt_phone").focus();
+                return;
+            }
+
+            $.ajax({
+                url: httpLocation2+"/tpwb/tpuser/checkPhone?Phone=" + phone,
+                type: 'GET',
+                dataType: 'json',
+                success: function (backData) {
+                    if (backData.code == 169) {
+                        mui.toast("手机号正确！");
+                    }else {
+                        $("#txt_phone").val("");
+                        document.getElementById("txt_phone").focus();
+                    }
+                }
+            });
+
+        });
+    });
+
+    function getValidateCode() {
+        var phone = $("#txt_phone").val();
+        // 获取短信验证码
+        curCount = count;　　 //设置button效果，开始计时
+        $("#btu_validateCode").attr("disabled", "true");
+        $("#btu_validateCode").text(curCount + "秒");
+        interValObj = window.setInterval(setRemainTime, 1000); //启动计时器，1秒执行一次
+
+        $.ajax({
+            url: httpLocation2+"/tpwb/sendCode?Phone=" + phone,
+            type: 'GET',
+            dataType: 'json',
+            // xhrFields: {
+            //     withCredentials: false
+            // },
+            // headers: {
+            //     'Access-Control-Allow-Credentials' : true,
+            //     'Access-Control-Allow-Origin':'*',
+            //     'Access-Control-Allow-Methods':'GET',
+            //     'Access-Control-Allow-Headers':'application/json',
+            // },
+            success: function (backData) {
+                if ( backData.code=="1") {
+                    localStorage.clear();
+                    localStorage.setItem("sessionid", backData.sessionid.toString());
+                    var sessionid = localStorage.getItem("sessionid");
+                    mui.toast("验证码发送成功！");
+                } else {
+                    mui.toast("验证码发送失败！");
+                }
+            }
+        });
+
+    }
+
+    function setRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(interValObj); //停止计时器
+            $("#btu_validateCode").removeAttr("disabled"); //启用按钮
+            $("#txt_validateCode").val("");
+            $("#btu_validateCode").text("重新发送验证码");
+        } else {
+            curCount--;
+            $("#btu_validateCode").text(curCount + "秒");
+        }
+    }
+
+    function login() {
+
+        var userCode = $("#txt_userCode").val();
+        var phone = $("#txt_phone").val();
+        var validateCode = $("#txt_validateCode").val();
+        var sessionid=localStorage.getItem("sessionid");
+        //console.log(sessionid);
+        var postData = {
+            sale_jobnumber: userCode,
+            sale_phone: phone,
+            message_code: validateCode,
+            sessionid:sessionid
+        };
+
+        $.ajax({
+            url: httpLocation2+"/tpwb/tpuser/salePersonLogin",
+            type: 'POST',
+            data: JSON.stringify(postData),
+            contentType: "application/json",
+            dataType: 'JSON',
+            success: function (backData) {
+                if (backData.code == 0) {
+                    localStorage.clear();
+                    localStorage.setItem("sale_jobnumber",userCode);
+                    localStorage.setItem("gsuserId",backData.data.gsuserId);
+                    localStorage.setItem("sale_phone",backData.data.sale_phone);
+                    window.location = "menu.html"; //验证登录成功
+                } else {
+                    mui.toast("登录失败！");
+                }
+            }
+        });
+    }
+
+    function checkUserCode() {
+        var userCode = $("#txt_userCode").val();
+        if (userCode.trim() == "" && $("#txt_userCode").val().trim() == "") {
+            alert("请输入工号！");
+            $("#txt_userCode").val("");
+            document.getElementById("txt_userCode").focus();
+            return false;
+        }
+        return true;
+    }
+
+    function checkPhone() { //
+        var phone = $("#txt_phone").val();
+        if (phone.trim() == "" && $("#txt_phone").val().trim() == "") {
+            alert("请输入手机号！");
+            $("#txt_phone").val("");
+            document.getElementById("txt_phone").focus();
+            return false;
+        }
+        return true;
+    }
+
+    function checkCode() {
+        var validatcode = $("#txt_validateCode").val();
+        if (validatcode.trim() == "" && $("#txt_validateCode").val().trim() == "") {
+            alert("请输入验证码！");
+            $("#txt_validateCode").val("");
+            document.getElementById("txt_validateCode").focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+
+</html>

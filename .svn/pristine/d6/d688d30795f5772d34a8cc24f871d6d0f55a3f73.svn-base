@@ -1,0 +1,27 @@
+.hide{
+	display:none;
+}
+.show{
+	display:block;
+}
+.page{
+
+}
+#pageone{
+	background: red;
+	position: fixed;
+	top:10px;
+	width: 100%;
+}
+#pagetwo{
+	background: blue;
+	position: fixed;
+	top:10px;
+	width: 100%;
+}
+#pagethree{
+	background: yellow;
+	position: fixed;9
+	top:10px;
+	width: 100%;
+}

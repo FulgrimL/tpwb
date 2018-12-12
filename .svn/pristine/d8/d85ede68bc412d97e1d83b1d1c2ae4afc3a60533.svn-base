@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>保单支付</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+	<link rel="stylesheet" href="../css/all.css" />
+</head>
+<body>
+	<div class="mui-content">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<div class="text-title" >产品信息</div>
+			</li>
+			<li class="mui-table-view-cell">
+				<div class="text">产品名称</div>
+				<input id="insurProductsName" class="text2" readonly="readonly"></input>
+			</li>
+			<li class="mui-table-view-cell">
+				<div class="text">保险费</div>
+				<input id="premium" class="text2" readonly="readonly"></input>
+			</li>
+			<li class="mui-table-view-cell">
+				<div class="text">生效日期</div>
+				<input id="startTime"  class="text2" readonly="readonly"></input>
+			</li>
+			<li class="mui-table-view-cell">
+				<div class="text">终止日期</div>
+				<input id="stopTime"  class="text2" readonly="readonly"></input>
+			</li>
+			
+		</ul>
+		
+		<ul class="mui-table-view" style="margin-top: 15px;">
+			<li class="mui-table-view-cell">
+				<div class="text-title">投保人信息</div>
+			</li>
+			<li class="mui-table-view-cell">
+				<div class="text">投保人</div>
+				<input id="policyName"  class="text2" readonly="readonly"></input>
+			</li>
+			<li class="mui-table-view-cell">
+				<div class="text">证件号</div>
+				<input id="policyCID"  class="text2" readonly="readonly"></input>
+			</li>
+		</ul>
+	</div>
+	
+	<div style="width: 100%;">
+        <button type="button" id="sureBtn">
+        	<span id="sureBtn2" class="sureBtn">确认支付</span>
+        </button>
+    </div>
+    
+	<script src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/jslib/jquery-3.3.1.js"></script>
+    <script src="../js/mui.picker.js"></script>
+    <script src="../js/mui.poppicker.js"></script>
+    <script src="../js/mui.dtpicker.js"></script>
+    <script src="../js/jslib/valid.js"></script>
+	<script src="../js/jslib/common.js"></script>
+	<script>
+//			mui(".mui-scroll-wrapper").scroll().setTranslate(100,100);
+	</script>
+	<script type="text/javascript">
+	    mui.init();
+	  
+	    
+	//获取产品的id
+	function GetRequest() {
+	    var url = location.search; //获取url中"?"符后的字串
+	    var theRequest = new Object();
+	    if (url.indexOf("?") != -1) {
+	        var str = url.substr(1);
+	        strs = str.split("&");
+	        for (var i = 0; i < strs.length; i++) {
+	            theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+	        }
+	    }
+	    return theRequest;
+	}
+	
+	var order_Id=GetRequest();
+	
+	//获取保单详情
+	$(function(){
+
+		var postData={
+				orderId:order_Id['OrderId']
+		};
+		
+		mui.ajax({
+            url: httpLocation2+"/tpwb/order/getOrderByOrderId",
+            type: 'POST',
+            data: JSON.stringify(postData),
+            contentType: "application/json;charset=utf-8",
+            dataType: 'json',
+            success: function(backdata) {
+				if(backdata.code==0)
+				{
+					var resData = backdata.data;
+					$("#insurProductsName").attr("value",resData[0].insurProductsName);
+					$("#premium").attr("value",resData[0].premium + "元");
+					$("#startTime").attr("value",resData[0].takeEffectTime1);
+					$("#stopTime").attr("value",resData[0].invalidTime1);
+					$("#policyName").attr("value",resData[0].policyName);
+					$("#policyCID").attr("value",resData[0].policyCID);
+				}
+            }
+		})
+	})
+	
+	$("#sureBtn").on("click", function() {
+	    mui.toast("支付成功")
+//      var insurProductsName=document.getElementById('insurProductsName').value;
+//		var premium=document.getElementById('premium').value;
+//		var startTime=document.getElementById('startTime').value;
+//		var stopTime=document.getElementById('stopTime').value;
+//		var policyName=document.getElementById('policyName').value;
+//		var policyCID=document.getElementById('policyCID').value;
+//		var postData1={
+//			productId:Pro_Id['Product_Id'],
+//			insurProductsName:insurProductsName,
+//			premium:premium,
+//			startTime:startTime,
+//			stopTime:stopTime,
+//			policyName:policyName,
+//			policyCID:policyCID,
+//		};
+//		mui.ajax({
+//          url: httpLocation2+/tpwb/customers/updatecustomerinfo",
+//          type: 'POST',
+//          data: JSON.stringify(postData1),
+//          contentType: "application/json;charset=utf-8",
+//          dataType: 'json',
+//          success: function(backdata) {
+        	   window.location.href="menu.html";
+//    	                	window.location.href="menu.html?Customer="+Request["Cus_Id"]+"&arg0="+Request["arg0"]+"&arg1="+Request["arg1"];
+//     		},
+//		})
+
+	})
+</script>
+</body>
+</html>
+

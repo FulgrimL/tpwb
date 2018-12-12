@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>新增渠道</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <!-- <link href="../css/mui.min.css" rel="stylesheet" /> -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../js/tbRem.js"></script>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style lang="">
+        html,
+        body {
+            font-family: "微软雅黑";
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+        
+        .tip {
+            padding: 36px 0px;
+            font-size: 12px;
+            color: red;
+        }
+        
+        .proList {
+            box-sizing: border-box;
+            margin-top: .506667rem;
+            width: 100%;
+            background-color: white;
+            padding-left: .466667rem;
+            margin-bottom: .213333rem;
+        }
+        
+        .proList li {
+            width: 100%;
+            /* height: 1.266667rem; */
+            height: 1.333333rem;
+            border-bottom: 1px solid #f2f2f2;
+        }
+        
+        .proList li:nth-last-child(1) {
+            border: none
+        }
+        /* .proList li:nth-child(1) {
+            color: #2d2d2d;
+            border: none;
+            height: .72rem;
+            line-height: .72rem;
+            font-size: .426667rem;
+            margin-top: .266667rem;
+            font-weight: 600;
+            letter-spacing: .053333rem;
+        } */
+        
+        .proList li .fz {
+            float: left;
+            /* max-width: 80%; */
+            height: 70%;
+            line-height: 1.333333rem;
+            /* font-size: .373333rem; */
+            font-size: .4rem;
+            color: black;
+            letter-spacing: .026667rem;
+        }
+        
+        .proList li input {
+            float: right;
+            width: 70%;
+            max-width: 80%;
+            /* height: 100%; */
+            height: 1.2rem;
+            line-height: 1.333333rem;
+            font-size: .4rem;
+            /* font-size: .373333rem; */
+            color: black;
+            letter-spacing: .026667rem;
+            border: none;
+            text-align: right;
+            padding-right: .266667rem;
+        }
+        
+        .iconCus {
+            margin: .426667rem 0;
+            float: right;
+            background-image: url("../images/list/Cus.png");
+            background-size: 100%;
+            height: .426667rem;
+            width: .426667rem;
+        }
+        
+        .midBody {
+            box-sizing: border-box;
+            width: 100%;
+            background-color: white;
+            padding-left: .466667rem;
+            padding-top: .453333rem;
+        }
+        
+        .midBody h2 {
+            height: .466667rem;
+            font-size: .466667rem;
+            line-height: .466667rem;
+            color: #2d2d2d;
+            margin-bottom: .506667rem;
+        }
+        
+        .midBody p {
+            /* font-weight: 600; */
+            height: .4rem;
+            font-size: .4rem;
+            color: #2d2d2d;
+            line-height: .4rem;
+        }
+        
+        .imgDiv {
+            width: 100%;
+            margin-top: .226667rem;
+            margin-bottom: .466667rem;
+        }
+        
+        .midBody img {
+            display: block;
+            width: 4.133333rem;
+            height: 2.4rem;
+            margin: 0 auto;
+        }
+        
+        .confirmBtn {
+            width: 7.8rem;
+            height: 1.133333rem;
+            color: white;
+            background-color: #2dc175;
+            font-size: .48rem;
+            line-height: 1.133333rem;
+            text-align: center;
+            margin: 0 auto;
+            border-radius: .053333rem
+        }
+        
+        #idType {
+            float: right;
+            /* max-width: 80%; */
+            /* height: 100%; */
+            height: 1.2rem;
+            line-height: 1.333333rem;
+            font-size: .4rem;
+            /* font-size: .373333rem; */
+            color: black;
+            letter-spacing: .026667rem;
+            border: none;
+            text-align: right;
+            padding-right: .266667rem;
+            background-color: white;
+        }
+    </style>
+    <script src="../js/jslib/jquery-3.3.1.js"></script>
+
+
+</head>
+
+<body>
+    <ul class="proList">
+        <!-- <li>
+            渠道中心
+        </li> -->
+        <li>
+            <span class="fz">渠道名称</span>
+            <!-- <span href="myCustomer_copy.html" class="iconCus"><span> -->
+            <input type="text" placeholder="请输入渠道名称" id="CustomerName" onchange="IsEmpty(this)" onkeyup="IsEmpty(this)">
+            <div class="tip"></div>
+        </li>
+        <li>
+            <span class="fz">联系人姓名</span>
+            <!-- <span href="myCustomer_copy.html" class="iconCus"><span> -->
+            <input type="text" placeholder="请输入联系人姓名" id="CenterofCustomer" onchange="IsEmpty(this)" onkeyup="IsEmpty(this)">
+            <div class="tip"></div>
+        </li>
+        <li>
+            <span class="fz">联系人电话</span>
+            <input type="text" placeholder="请输入手机号码" id="ContactPhone" onchange="idPhoneKeyup(this)" onkeyup="idPhoneKeyup(this)">
+            <div class="tip"></div>
+        </li>
+        <li>
+            <span class="fz">证件类型</span>
+            <!-- <span href="myCustomer_copy.html" class="iconCus"><span> -->
+            <button id='idType' class="" type='button'>营业执照</button>
+            <div id='userResult' class="ui-alert"></div>
+        </li>
+        <li>
+            <span class="fz">证件号码</span>
+            <input type="text" placeholder="请输入证件号码" id="Customer_Number" onchange="checkCode(this)" onkeyup="checkCode(this)">
+            <div class="tip"></div>
+        </li>
+        <li>
+            <span class="fz">管理员账号</span>
+            <input type="text" placeholder="请输入账号" id="customerAccount" onchange="IsEmpty(this)" onkeyup="IsEmpty(this)">
+            <div class="tip"></div>
+        </li>
+        <li>
+            <span class="fz">登录密码</span>
+            <input type="password" placeholder="请输入登录密码" id="password" onchange="IsEmpty(this)" onkeyup="IsEmpty(this)">
+            <div class="tip"></div>
+        </li>
+    </ul>
+    <div class="midBody">
+        <h2>证件信息</h2>
+        <p>营业执照图片</p>
+        <div class="imgDiv">
+            <img id="img" src="../images/icon/camera.jpg " alt=" " onclick="tip()">
+            <input name="upimage" onchange="btnUploadFile()" id="upload_file" type="file" style="height:1px; width:1px;visibility: hidden;" accept="image/jpg,image/jpeg,image/png " capture="camera">
+            <textarea id="base64_output" name="Word" style="height:1px; width:1px;visibility: hidden; "></textarea>
+        </div>
+    </div>
+    <div class="confirmBtn" id="sureBtn">
+        提交
+    </div>
+
+
+    <script src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/jslib/jquery-3.3.1.js"></script>
+    <script src="../js/mui.picker.js"></script>
+    <script src="../js/mui.poppicker.js"></script>
+    <script src="../js/mui.dtpicker.js"></script>
+    <script src="../js/jslib/valid.js"></script>
+    <script src="../js/fastclick.js"></script>
+    <script src="../js/jslib/common.js"></script>
+    <script>
+        var phocopyOfBusiLic = "";
+        var GsuserId = localStorage.getItem("gsuserId");
+
+        var customer_Id;
+        //判断三证是否合法
+        function checkCode(obj) {
+            //var fal=1;
+            var $this = $(obj);
+            var sc_code = $this.val();
+            var thisText = $this.prev().text();
+            if (sc_code.length != 18) {
+                $this.next('.tip').text(thisText + '不合法').show();
+                return false;
+            }
+
+            var reg = /^([0-9ABCDEFGHJKLMNPQRTUWXY]{2})([0-9]{6})([0-9ABCDEFGHJKLMNPQRTUWXY]{9})([0-9ABCDEFGHJKLMNPQRTUWXY])$/;
+            if (!reg.test(sc_code)) {
+                $this.next('.tip').text(thisText + '不合法').show();
+                return false;
+            }
+            var str = '0123456789ABCDEFGHJKLMNPQRTUWXY';
+            var ws = [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28];
+            var sc_codes = new Array();
+            sc_codes[0] = sc_code.substr(0, sc_code.length - 1);
+            sc_codes[1] = sc_code.substr(sc_code.length - 1, sc_code.length);
+            codes = sc_codes[1].charCodeAt();
+            for (i = 65; i <= 72; i++) {
+                if (codes == i) {
+                    sc_codes[1] = 10 + (i - 65);
+                }
+            }
+            for (i = 74; i <= 78; i++) {
+                if (codes == i) {
+                    sc_codes[1] = 18 + (i - 74);
+                }
+            }
+            for (i = 80; i <= 82; i++) {
+                if (codes == i) {
+                    sc_codes[1] = 23 + (i - 80);
+                }
+            }
+            if (sc_codes[1] == 'T') {
+                sc_codes[1] = 26;
+            }
+            if (sc_codes[1] == 'U') {
+                sc_codes[1] = 27;
+            }
+            for (i = 87; i <= 89; i++) {
+                if (codes == i) {
+                    sc_codes[1] = 28 + (i - 87);
+                }
+            }
+            var sum = 0;
+            for (var i = 0; i < 17; i++) {
+                sum += str.indexOf(sc_codes[0].charAt(i)) * ws[i];
+            }
+            var c18 = 31 - (sum % 31);
+
+            if (c18 != sc_codes[1]) {
+                $this.next('.tip').text(thisText + '不合法').show();
+                return false;
+            }
+            $this.next('.tip').hide();
+        }
+
+
+        //判断联系电话是否合法
+        function idPhoneKeyup(obj) {
+            // obj.value = obj.value.replace(/\D/g, '')
+            var $this = $(obj);
+            var thisVal = $this.val();
+            var thisText = $this.prev().text();
+            if (thisVal.length == 11) {
+
+                if (!$.valid.isPhoneNumber(thisVal)) {
+                    $this.next('.tip').text(thisText + '不合法').show()
+                } else {
+                    $this.next('.tip').hide()
+                }
+            } else {
+
+                $this.next('.tip').text(thisText + '不合法').show()
+            }
+        }
+
+        //判断客户名称是否为空
+        function IsEmpty(obj) {
+            var $this = $(obj);
+            var thisVal = $this.val();
+            var thisText = $this.prev().text();
+            if (thisVal.length == 0) {
+                $this.next('.tip').text(thisText + '不能为空').show()
+            } else {
+                $this.next('.tip').hide()
+            }
+        }
+
+        //获取渠道的id
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        //将渠道信息回填到渠道详情编辑页面
+        $(function() {
+
+            customer_Id = GetRequest();
+
+            var postData = {
+                customerId: customer_Id['Customer_Id']
+            };
+            if (customer_Id['Customer_Id'] == "" || customer_Id['Customer_Id'] == null) {}
+            if (customer_Id['Customer_Id'] != null && customer_Id['Customer_Id'] != "") {
+                mui.ajax({
+                    url: httpLocation2 + "/tpwb/customers/showcustomerinfo",
+                    type: 'POST',
+                    data: JSON.stringify(postData),
+                    contentType: "application/json;charset=utf-8",
+                    dataType: 'json',
+                    success: function(backdata) {
+                        var resData = backdata.data;
+                        if (backdata.code == "0") {
+                            var resData = backdata.data;
+                            $("#CustomerName").attr("value", resData[0].customerName);
+                            $("#CenterofCustomer").attr("value", resData[0].contactName);
+                            $("#ContactPhone").attr("value", resData[0].contactPhone);
+                            $("#Customer_Number").attr("value", resData[0].threeProofCode);
+                            $("#customerAccount").attr("value", resData[0].customerAccount);
+                            $("#password").attr("value", resData[0].password);
+
+                            var path = httpLocation2 + "/tpwb/upload/imgs/" + resData[0].phocopyOfBusiLic;
+                            // var path=resData[0].phocopyOfBusiLic;
+                            //alert(path);
+                            if (path != null && path != "") {
+                                $("#img").attr("src", path);
+                            }
+
+
+                        }
+                    },
+                })
+            }
+
+
+        })
+
+        //点击确认按钮
+        $("#sureBtn").on("click", function() {
+
+            var flag = true;
+            var Cus_Id = "";
+            $("body").find(".tip").each(function() {
+                if (document.getElementById('CenterofCustomer').value != null && document.getElementById('CenterofCustomer').value != "" &&
+                    document.getElementById('Customer_Number').value != null && document.getElementById('Customer_Number').value != "" &&
+                    document.getElementById('ContactPhone').value != null && document.getElementById('ContactPhone').value != "" &&
+                    document.getElementById('customerAccount').value != null && document.getElementById('customerAccount').value != "" &&
+                    document.getElementById('password').value != null && document.getElementById('password').value != "" &&
+                    document.getElementById('img').src != null && document.getElementById('img').src != "") {
+                    $(this).css('display', 'none');
+
+                }
+                if ($(this).css("display")) {
+
+                    if ($(this).css("display") == "none") {
+                        console.log("通过")
+                    } else {
+                        flag = false;
+                        console.log("不通过")
+                        if ($(this).prev().prev().text() == "联系人姓名" || $(this).prev().prev().text() == "管理员账号" || $(this).prev().prev().text() == "登录密码") {
+                            $(this).text($(this).prev().prev().text() + '不能为空').show()
+                        } else {
+                            $(this).text($(this).prev().prev().text() + '不合法').show()
+                        }
+                    }
+                } else {
+                    console.log('不合格');
+                }
+            })
+
+            if (flag) {
+                var CustomerName = document.getElementById('CustomerName').value;
+                var CenterofCustomer = document.getElementById('CenterofCustomer').value;
+                var CustomerNumber = document.getElementById('Customer_Number').value;
+                var ContactPhone = document.getElementById('ContactPhone').value;
+                var CustomerAccount = document.getElementById('customerAccount').value;
+                var Password = document.getElementById('password').value;
+                var postData1 = {
+                    gsuserId: GsuserId,
+                    customerId: customer_Id['Customer_Id'],
+                    customerName: CustomerName,
+                    contactName: CenterofCustomer,
+                    threeProofCode: CustomerNumber,
+                    contactPhone: ContactPhone,
+                    customerAccount: CustomerAccount,
+                    password: Password,
+                    phocopyOfBusiLic: phocopyOfBusiLic
+                };
+                if (customer_Id['Customer_Id'] != null && customer_Id['Customer_Id'] != "") {
+                    mui.ajax({
+                        url: httpLocation2 + "/tpwb/customers/updatecustomerinfo",
+                        type: 'POST',
+                        data: JSON.stringify(postData1),
+                        contentType: "application/json;charset=utf-8",
+                        dataType: 'json',
+                        success: function(backdata) {
+                            //			                	alert("a");
+                            if (backdata.code == "0") {
+                                alert(backdata.msg);
+                                //			                		window.location.go(-1);
+                                window.location.href = document.referrer;
+                            } else {
+                                alert(backdata.msg);
+                            }
+                        },
+                    })
+                } else {
+                    //alert(GsuserId);
+                    mui.ajax({
+                        url: httpLocation2 + "/tpwb/customers/insertCustomer",
+                        type: 'POST',
+                        data: JSON.stringify(postData1),
+                        contentType: "application/json;charset=utf-8",
+                        dataType: 'json',
+                        success: function(backdata) {
+                            if (backdata.code == "0") {
+                                alert(backdata.msg);
+
+                                window.location.href = "shareCustomer.html?Customer_Id=" + backdata.data.customerId;
+                            } else {
+                                alert(backdata.msg);
+                            }
+                        },
+                    })
+                }
+
+            }
+
+        })
+    </script>
+    <script>
+        //      $(function() {
+        //          FastClick.attach(document.body);
+        //          $('.img-product').click(function() {
+        //              window.location = "productShare.html";
+        //          });
+        //          $('.ins').click(function() {
+        //              window.location = "productShare.html";
+        //          });
+        //          $('.img-person').click(function() {
+        //              window.location = "myCustomer.html";
+        //          });
+        //      });
+        //
+        //      $('.delete-swipeout').click(function() {
+        //          $(this).parents('.weui-cell').remove()
+        //      })
+        //      $(".confirmBtn").click(function() {
+        //          window.location.href = "customerList_copy.html";
+        //      })
+        //      $('.close-swipeout').click(function() {
+        //          $(this).parents('.weui-cell').swipeout('close')
+        //      })
+    </script>
+    <script>
+        var srcBase;
+        var photo;
+
+        function $_(id) {
+            return document.getElementById(id);
+        }
+
+        function tip() {
+            console.info($_("#upload_file"));
+            $("#upload_file").click();
+        }
+        //      document.getElementById("upload_file").onchange = function() {
+        function btnUploadFile() {
+            if ($("#upload_file").val() != "") {
+                gen_base641();
+            }
+            //          var imgFile = e.target.files[0]; //获取图片文件
+            var formData = new FormData(); // 创建form对象
+            formData.append('file', $("#upload_file")[0].files[0]); // 通过append向form对象添加数据
+            //formData.append('other', 'other')  // 如果还需要传替他参数的话
+            $.ajax({
+                url: httpLocation2 + "/tpwb/System/uploadImg", //请求的接口地址
+                type: 'POST',
+                data: formData,
+                processData: false, // 不要去处理发送的数据
+                contentType: false, // 不要去设置Content-Type请求头
+                success: function(backdata) {
+                    var resData = backdata.data;
+                    phocopyOfBusiLic = resData.relativePath;
+                },
+                error: function(err) {
+                    console.log(err)
+                }
+            })
+        }
+
+        //      };
+
+        // 压缩图片
+        function dealImage(path, callback, obj) {
+            var img = new Image();
+            img.src = path;
+            img.onload = function() {
+                console.log(this)
+                var that = this;
+                // 默认按比例压缩
+                var w = that.width * 0.3,
+                    h = that.height * 0.3,
+                    scale = w / h;
+                w = w;
+                h = (w / scale);
+                var quality = 0.05; // 默认图片质量为0.7
+                //生成canvas
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                // 创建属性节点
+                var anw = document.createAttribute("width");
+                anw.nodeValue = w;
+                var anh = document.createAttribute("height");
+                anh.nodeValue = h;
+                canvas.setAttributeNode(anw);
+                canvas.setAttributeNode(anh);
+                ctx.drawImage(that, 0, 0, w, h);
+                // 图像质量
+                // if (obj.quality && obj.quality <= 1 && obj.quality > 0) {
+                //     quality = obj.quality;
+                // }
+                // quality值越小，所绘制出的图像越模糊
+                var base64 = canvas.toDataURL('image/jpeg', quality);
+                console.log(base64.length)
+                    // 回调函数返回base64的值
+                callback(base64);
+            }
+        }
+
+        //图片编码
+        function gen_base641() {
+            var file = $_('upload_file').files[0];
+            r = new FileReader(); //本地预览
+            r.onload = function() {
+                var res = r.result.substring(r.result.indexOf("base64, ") + 7);
+                $('#base64_output').value = res;
+                console.info($("#pload_file").val());
+                // $("img").attr("style", "height:220px;width:540px");
+                $("#img").attr("src", r.result)
+                srcBase = r.result;
+                dealImage(srcBase, function(a) {
+                    photo = a;
+                })
+            }
+            r.readAsDataURL(file); //Base64
+        }
+    </script>
+    <script>
+        (function($) {
+            $.init();
+            // 下拉选择器
+            $.ready(function() {
+                /**
+                 * 获取对象属性的值
+                 * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+                 * @param {Object} obj 对象
+                 * @param {String} param 属性名
+                 */
+                var _getParam = function(obj, param) {
+                    return obj[param] || '';
+                };
+                //普通示例
+                var userPicker = new $.PopPicker();
+                userPicker.setData([{
+                    value: 'ywj',
+                    text: '营业执照'
+                }, {
+                    value: 'aaa',
+                    text: '营业执照2'
+                }, {
+                    value: 'lj',
+                    text: '营业执照3'
+                }]);
+                var showUserPickerButton = document.getElementById('idType');
+                var userResult = document.getElementById('userResult');
+                showUserPickerButton.addEventListener('tap', function(event) {
+                    userPicker.show(function(items) {
+                        showUserPickerButton.innerText = (items[0].text);
+                        //返回 false 可以阻止选择框的关闭
+                        //return false;
+                    });
+                }, false);
+
+            });
+        })(mui, document);
+    </script>
+</body>
+
+</html>

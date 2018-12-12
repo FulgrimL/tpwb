@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>新增渠道</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <!-- <link href="../css/mui.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../js/tbRem.js"></script>
+    <script src="../js/jslib/common.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style lang="">
+        html,
+        body {
+            font-family: "微软雅黑";
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+
+        .tip {
+            padding: 36px 0px;
+            font-size: 12px;
+            color: red;
+
+        }
+
+        .proList {
+            box-sizing: border-box;
+            margin-top: .506667rem;
+            width: 100%;
+            background-color: white;
+            padding-left: .466667rem;
+            margin-bottom: .213333rem;
+        }
+
+        .proList li {
+            width: 100%;
+            /* height: 1.266667rem; */
+            height: 1.333333rem;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .proList li:nth-last-child(1) {
+            border: none
+        }
+
+        /* .proList li:nth-child(1) {
+            color: #2d2d2d;
+            border: none;
+            height: .72rem;
+            line-height: .72rem;
+            font-size: .426667rem;
+            margin-top: .266667rem;
+            font-weight: 600;
+            letter-spacing: .053333rem;
+        } */
+
+        .proList li .fz {
+            float: left;
+            /* max-width: 80%; */
+            height: 70%;
+            line-height: 1.333333rem;
+            /* font-size: .373333rem; */
+            font-size: .4rem;
+            color: black;
+            letter-spacing: .026667rem;
+        }
+
+        .proList li input {
+            float: right;
+            /* max-width: 80%; */
+            /* height: 100%; */
+            height: 1.2rem;
+            line-height: 1.333333rem;
+            font-size: .4rem;
+            /* font-size: .373333rem; */
+            color: black;
+            letter-spacing: .026667rem;
+            border: none;
+            text-align: right;
+            padding-right: .266667rem;
+            width: 6rem;
+        }
+
+        .iconCus {
+            margin: .426667rem 0;
+            float: right;
+            background-image: url("../images/list/Cus.png");
+            background-size: 100%;
+            height: .426667rem;
+            width: .426667rem;
+        }
+
+        .midBody {
+            box-sizing: border-box;
+            width: 100%;
+            background-color: white;
+            padding-left: .466667rem;
+            padding-top: .453333rem;
+        }
+
+        .midBody h2 {
+            height: .466667rem;
+            font-size: .466667rem;
+            line-height: .466667rem;
+            color: #2d2d2d;
+            margin-bottom: .506667rem;
+        }
+
+        .midBody p {
+            /* font-weight: 600; */
+            height: .4rem;
+            font-size: .4rem;
+            color: #2d2d2d;
+            line-height: .4rem;
+        }
+
+        .imgDiv {
+            width: 100%;
+            margin-top: .226667rem;
+            margin-bottom: .466667rem;
+        }
+
+        .midBody img {
+            display: block;
+            width: 4.133333rem;
+            height: 2.4rem;
+            margin: 0 auto;
+        }
+
+        .confirmBtn {
+            /*width: 7.8rem;*/
+            width: 6rem;
+            height: 1.133333rem;
+            color: white;
+            background-color: #2dc175;
+            font-size: .48rem;
+            line-height: 1.133333rem;
+            text-align: center;
+            /*margin: 0 auto;*/
+            margin: 2rem auto;
+            border-radius: .053333rem
+        }
+
+        #idType {
+            float: right;
+            /* max-width: 80%; */
+            /* height: 100%; */
+            height: 1.2rem;
+            line-height: 1.333333rem;
+            font-size: .4rem;
+            /* font-size: .373333rem; */
+            color: black;
+            letter-spacing: .026667rem;
+            border: none;
+            text-align: right;
+            padding-right: .266667rem;
+            background-color: white;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<ul class="proList">
+    <!-- <li>
+        渠道中心
+    </li> -->
+   <!-- <img src=httpLocation2+/tpwb/upload/imgs/20181123131434797img.png">-->
+    <li>
+        <span class="fz">管理员账号</span>
+        <input type="text" readonly="readonly" id="CustomerAccount">
+        <div class="tip"></div>
+    </li>
+    <li>
+        <span class="fz">登陆密码</span>
+        <input type="password" readonly="readonly" id="Password">
+        <div class="tip"></div>
+    </li>
+    <li>
+        <span class="fz">登录地址</span>
+        <input type="text" readonly="readonly" value="https://www.taiping.com">
+        <div class="tip"></div>
+    </li>
+    <li>
+        <span class="fz">渠道名称</span>
+        <input type="text" readonly="readonly" id="CustomerName">
+        <div class="tip"></div>
+    </li>
+    <li>
+        <span class="fz">渠道证件号码</span>
+        <input type="text" readonly="readonly" id="ThreeProofCode">
+        <div class="tip"></div>
+    </li>
+</ul>
+
+<div class="confirmBtn" id="shareBtn">
+    分享客户
+</div>
+
+
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/jslib/jquery-3.3.1.js"></script>
+<script src="../js/mui.picker.js"></script>
+<script src="../js/mui.poppicker.js"></script>
+<script src="../js/mui.dtpicker.js"></script>
+<script src="../js/jslib/valid.js"></script>
+<script src="../js/fastclick.js"></script>
+<script>
+    var ContactPhone = "", CustomerAccount = "", Password = "", CustomerName = "", ThreeProofCode = "";
+
+    //获取渠道的id
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+    //将渠道信息回填到渠道详情编辑页面
+    $(function () {
+        customer_Id = GetRequest();
+        var postData1 = {
+            customerId: customer_Id['Customer_Id']
+        };
+        mui.ajax({
+            url: httpLocation2+"/tpwb/customers/showcustomerinfo",
+            type: 'POST',
+            data: JSON.stringify(postData1),
+            contentType: "application/json;charset=utf-8",
+            dataType: 'json',
+            success: function (backdata) {
+                if (backdata.code == 0) {
+                    var resData = backdata.data;
+                    $("#CustomerAccount").attr("value", resData[0].customerAccount);
+                    $("#Password").attr("value", resData[0].password);
+                    $("#CustomerName").attr("value", resData[0].customerName);
+                    $("#ThreeProofCode").attr("value", resData[0].threeProofCode);
+                    CustomerAccount = resData[0].customerAccount;
+                    Password = resData[0].password;
+                    CustomerName = resData[0].customerName;
+                    ThreeProofCode = resData[0].threeProofCode;
+                    ContactPhone = resData[0].contactPhone;
+
+                }
+            }
+        })
+    })
+
+    //点击确认按钮
+    $("#shareBtn").on("click", function () {
+        var postData = {
+            customerAccount: CustomerAccount,
+            password: Password,
+            ipAddress: "https://www.taiping.com",
+            customerName: CustomerName,
+            threeProofCode: ThreeProofCode,
+            contactPhone: ContactPhone
+        };
+        mui.ajax({
+            url: httpLocation2+"/tpwb/System/shareCustomer",
+            type: 'POST',
+            data: JSON.stringify(postData),
+            contentType: "application/json;charset=utf-8",
+            dataType: 'json',
+            success: function (backdata) {
+                if (backdata.code == "0") {
+                    alert(backdata.msg);
+                    window.location.href = "menu.html";
+                }
+
+            },
+        })
+
+    })
+</script>
+
+</body>
+
+</html>

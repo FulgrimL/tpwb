@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>我的渠道</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../js/tbRem.js"></script>
+    <script src="../js/jslib/common.js"></script>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style lang="">
+        html,
+        body {
+            font-family: "微软雅黑";
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+        
+        .middleMain {
+            width: 100%;
+            padding: 0 .133333rem;
+            box-sizing: border-box;
+        }
+        
+        .proList {
+            box-sizing: border-box;
+            margin-top: .506667rem;
+            width: 100%;
+            background-color: white;
+            padding: 0 .466667rem;
+        }
+        
+        .proList li {
+            width: 100%;
+            height: 1.266667rem;
+            border-bottom: .066667rem solid #f2f2f2;
+        }
+        
+        .proList li:nth-last-child(1) {
+            border: none
+        }
+        
+        .proList li .fz {
+            float: left;
+            max-width: 80%;
+            height: 100%;
+            line-height: 1.266667rem;
+            font-size: .426667rem;
+            color: black;
+            letter-spacing: .026667rem;
+        }
+        
+        .proList li .fz2 {
+            float: left;
+            max-width: 80%;
+            height: 100%;
+            line-height: 1.266667rem;
+            font-size: .426667rem;
+            color: #c5c5c5;
+            letter-spacing: .026667rem;
+        }
+        
+        .iconBg {
+            margin: .426667rem 0;
+            float: right;
+            background-image: url("../images/list/Bg.png");
+            background-size: 100%;
+            height: .426667rem;
+            width: .426667rem;
+        }
+        
+        .iconFs {
+            margin: .426667rem 0;
+            float: right;
+            background-image: url("../images/list/Fs.png");
+            background-size: 100%;
+            height: .426667rem;
+            width: .426667rem;
+        }
+        
+        .topMain {
+            width: 100%;
+            background-color: white;
+            margin-top: .506667rem;
+            padding: .24rem 0;
+            text-align: center;
+            color: black;
+        }
+        
+        .topMain span {
+            font-size: .4rem;
+        }
+        
+        .topLf {
+            color: #47a049;
+            padding-right: .32rem;
+            box-sizing: border-box;
+            /* border-right: .04rem solid #c5c5c5; */
+        }
+        
+        .topRt {
+            padding-left: .32rem
+        }
+        
+        .shu {
+            display: inline-block;
+            height: .346667rem;
+            width: .04rem;
+            background-color: #c5c5c5;
+        }
+        
+        .fixEdit {
+            position: fixed;
+            z-index: 10;
+            height: 1.2rem;
+            width: 1.2rem;
+            background-image: url("../images/icon/edit.png");
+            background-size: 100% 100%;
+            bottom: .666667rem;
+            right: .666667rem;
+        }
+        
+        .fixSure {
+            position: fixed;
+            z-index: 10;
+            height: 1.2rem;
+            width: 1.2rem;
+            background-image: url("../images/icon/sure.png");
+            background-size: 100% 100%;
+            bottom: .666667rem;
+            right: .666667rem;
+        }
+        
+        .iconS {
+            display: none;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="topMain">
+        <span class="topLf">险种类型</span>
+        <div class="shu"></div><span class="topRt"></span>
+
+    </div>
+    <div class="middleMain">
+        <ul class="proList" id="List">
+            <li id="element" style="display:none">
+                <a class="fz" id="context">太平山旅行社</a>
+                <a class="iconS iconBg" onclick="changeBg(this)"></a>
+            </li>
+            <li id="element2" style="display:none">
+                <a class="fz2" href="javascript:void(0)" id="context2">武汉旅行社</a>
+                <a class="iconS iconFs" onclick="changeBg(this)"></a>
+            </li>
+            <!-- <li>
+            <a class="fz" href="productDetails.html">襄阳旅行社</a>
+            <a class="iconS iconFs" onclick="changeBg(this)"></a>
+        </li>
+        <li>
+            <a class="fz" href="productDetails.html">十堰旅行社</a>
+            <a class="iconS iconBg" onclick="changeBg(this)"></a>
+        </li> -->
+        </ul>
+    </div>
+    <div class="fixEdit" onclick="changeEd(this)">
+
+    </div>
+
+
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/fastclick.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script>
+        var Id;
+        // var Length;
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+
+        $(document).ready(function() {
+            var ID = GetRequest();
+            var GsuserId = localStorage.getItem("gsuserId");
+
+
+            var postData = {
+                "productId": ID['ProductId'],
+                "gsuserId": GsuserId
+                    /*"id":1*/
+            };
+            Id = ID['ProductId'];
+            /*Id = 1;*/
+
+            $.ajax({
+                url: httpLocation2 + "/tpwb/product/getProductCustomers",
+                type: "get",
+                data: postData,
+                success: function(backdata) {
+                    var resData = backdata.data;
+                    Length = resData.length;
+                    $(".topRt").text(resData[0].insurProductsName);
+                    for (var i in resData) {
+                        if (resData[i].status == 1) {
+
+                            $("#context").text(resData[i].customerName);
+                            $("#context").attr('href', 'productShare.html?customerId=' + resData[i].customerId + '&productId=' + resData[i].productId + '');
+                            $("#element").clone(true).appendTo($("#List")).attr('id', resData[i].customerId).attr("style", "display:block");
+                            $("#element").appendTo($("#List")).attr('value', resData[i].productId).attr("style", "display:block");
+
+                        } else {
+                            $("#context2").text(resData[i].customerName);
+                            $("#element2").clone(true).appendTo($("#List")).attr('id', resData[i].customerId).attr("style", "display:block");
+                        }
+
+                    }
+                    $("#element").remove();
+                    $("#element2").remove();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {}
+            })
+        })
+
+        // $(document).ready(function(){
+        //     $.ajax({
+        //         url:httpLocation2+/tpwb/product/editCustomers",
+        //         type:"post",
+        //         data:JSON.stringify([1]),
+        //         contentType:"application/json;charset=utf-8",
+        //         dataType:"json",
+        //         success: function(backdata) {
+        //             var resData = backdata.ok;
+        //             // alert(resData);
+        //             $("li").each(function(){
+        //                 // alert($(this).attr("id"));
+        //                 // alert($(this).children("a").next("a").attr("class"));
+        //                 if($(this).children("a").next("a").attr("class") == "iconS iconBg")
+        //                 {
+        //                     alert("true");
+        //                 }
+        //             });
+        //         },
+        //         error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //             alert("B");
+        //         }
+        //     })
+        // })
+
+        $(function() {
+            FastClick.attach(document.body);
+            $('.img-product').click(function() {
+                window.location = "productShare.html";
+            });
+            $('.ins').click(function() {
+                window.location = "productShare.html";
+            });
+            $('.img-person').click(function() {
+                window.location = "myCustomer.html";
+            });
+        });
+
+        $('.delete-swipeout').click(function() {
+            $(this).parents('.weui-cell').remove()
+        })
+        $('.close-swipeout').click(function() {
+            $(this).parents('.weui-cell').swipeout('close')
+        })
+    </script>
+    <script>
+        var flag;
+
+        function changeBg(a) {
+            var cla = $(a).attr("class");
+            if (cla == "iconS iconFs") {
+                $(a).removeClass("iconFs");
+                $(a).addClass("iconBg")
+                $(a).prev("a").attr("href", "productShare.html?customerId=" + $(a).parent().attr("id") + "&productId=" + $(a).parent().attr("id"));
+                $(a).prev("a").removeClass("fz2");
+                $(a).prev("a").addClass("fz");
+            } else {
+                $(a).addClass("iconFs")
+                $(a).removeClass("iconBg");
+                $(a).prev("a").attr("href", "javascript:void(0)");
+                $(a).prev("a").removeClass("fz");
+                $(a).prev("a").addClass("fz2");
+
+            }
+        }
+
+        function Customer(status, customerId, productId) {
+            this.status = status;
+            this.customerId = customerId;
+            this.productId = productId;
+        }
+
+        function changeEd(a) {
+            var cla = $(a).attr("class");
+            if (cla == "fixEdit") {
+                $(a).attr("class", "fixSure")
+                $(".iconS").show();
+            } else {
+                $(a).attr("class", "fixEdit")
+                $(".iconS").hide();
+
+
+                var arr = [];
+                var customer;
+                // for(var i in Length)
+                // {
+
+                // }
+                $("li").each(function() {
+                    if ($(this).children("a:last").attr("class") == "iconS iconBg") {
+                        // alert(1);
+                        customer = new Customer(1, $(this).attr("id"), Id);
+                        arr.push(customer);
+                    } else if ($(this).children("a:last").attr("class") == "iconS iconFs") {
+                        // alert(0);
+                        customer = new Customer(0, $(this).attr("id"), Id);
+                        arr.push(customer);
+
+                    }
+                });
+                // alert("status="+arr[0].status+"customerId="+arr[0].customerId);
+                // alert("status="+arr[1].status+"customerId="+arr[1].customerId);
+
+
+                $.ajax({
+                    url: httpLocation2 + "/tpwb/product/editCustomers",
+                    type: "post",
+                    data: JSON.stringify(arr),
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function(backdata) {
+                        var resData = backdata.ok;
+                        console.log(resData);
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("网络错误");
+                    }
+                })
+            }
+        }
+    </script>
+</body>
+
+</html>

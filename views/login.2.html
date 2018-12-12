@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>我的业绩</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../js/tbRem.js"></script>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="../js/jslib/common.js"></script>
+
+    <style lang="">
+        html,
+        body {
+            font-family: "微软雅黑";
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+        
+        .middleMain {
+            width: 100%;
+            padding: 0 .133333rem;
+            box-sizing: border-box;
+        }
+        
+        .proList {
+            box-sizing: border-box;
+            margin-top: .506667rem;
+            width: 100%;
+            background-color: white;
+            padding: 0 .466667rem;
+        }
+        
+        .proList li {
+            width: 100%;
+            height: 1.266667rem;
+            border-bottom: .066667rem solid #f2f2f2;
+        }
+        
+        .proList li:nth-last-child(1) {
+            border: none
+        }
+        
+        .proList li .fz {
+            float: left;
+            max-width: 80%;
+            height: 100%;
+            line-height: 1.266667rem;
+            font-size: .426667rem;
+            color: black;
+            letter-spacing: .026667rem;
+        }
+        
+        .iconBg {
+            margin: .426667rem 0;
+            float: right;
+            background-image: url("../images/list/Bg.png");
+            background-size: 100%;
+            height: .426667rem;
+            width: .426667rem;
+        }
+        
+        .iconFs {
+            margin: .426667rem 0;
+            float: right;
+            background-image: url("../images/list/Fs.png");
+            background-size: 100%;
+            height: .426667rem;
+            width: .426667rem;
+        }
+        
+        .topMain {
+            width: 100%;
+            background-color: white;
+            margin-top: .506667rem;
+            padding: .24rem 0;
+            text-align: center;
+            color: black;
+        }
+        
+        .topMain span {
+            font-size: .4rem;
+        }
+        
+        .topLf {
+            /* color: #47a049; */
+            padding-right: .32rem;
+            box-sizing: border-box;
+            /* border-right: .04rem solid #c5c5c5; */
+        }
+        
+        .topRt {
+            padding-left: .32rem;
+            padding-right: .4rem;
+        }
+        
+        .shu {
+            display: inline-block;
+            height: .346667rem;
+            width: .04rem;
+            background-color: #c5c5c5;
+        }
+        
+        .fixEdit {
+            position: fixed;
+            z-index: 10;
+            height: 1.2rem;
+            width: 1.2rem;
+            background-image: url("../images/icon/edit.png");
+            background-size: 100% 100%;
+            bottom: .666667rem;
+            right: .666667rem;
+        }
+        
+        .fixSure {
+            position: fixed;
+            z-index: 10;
+            height: 1.2rem;
+            width: 1.2rem;
+            background-image: url("../images/icon/sure.png");
+            background-size: 100% 100%;
+            bottom: .666667rem;
+            right: .666667rem;
+        }
+        
+        .iconS {
+            display: none;
+        }
+        /* new */
+        
+        html,
+        body {
+            font-family: "微软雅黑";
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+        
+        .tip {
+            padding: 36px 0px;
+            font-size: 12px;
+            color: red;
+        }
+        
+        .proList {
+            box-sizing: border-box;
+            margin-top: .506667rem;
+            width: 100%;
+            background-color: white;
+            padding-left: .466667rem;
+            margin-bottom: .213333rem;
+        }
+        
+        .proList li {
+            width: 100%;
+            /* height: 1.266667rem; */
+            height: 1.333333rem;
+            border-bottom: 1px solid #f2f2f2;
+        }
+        
+        .proList li:nth-last-child(1) {
+            border: none
+        }
+        /* .proList li:nth-child(1) {
+color: #2d2d2d;
+border: none;
+height: .72rem;
+line-height: .72rem;
+font-size: .426667rem;
+margin-top: .266667rem;
+font-weight: 600;
+letter-spacing: .053333rem;
+} */
+        
+        .proList li .fz {
+            float: left;
+            /* max-width: 80%; */
+            height: 70%;
+            line-height: 1.333333rem;
+            /* font-size: .373333rem; */
+            font-size: .4rem;
+            color: black;
+            letter-spacing: .026667rem;
+        }
+        
+        .proList li input {
+            float: right;
+            /* max-width: 80%; */
+            /* height: 100%; */
+            height: 1.2rem;
+            line-height: 1.333333rem;
+            font-size: .4rem;
+            /* font-size: .373333rem; */
+            color: black;
+            letter-spacing: .026667rem;
+            border: none;
+            text-align: right;
+            padding-right: .266667rem;
+            width: auto;
+            margin-bottom: 0;
+            padding: 0;
+        }
+        
+        .iconCus {
+            margin: .426667rem 0;
+            float: right;
+            background-image: url("../images/list/Cus.png");
+            background-size: 100%;
+            height: .426667rem;
+            width: .426667rem;
+        }
+        
+        .midBody {
+            box-sizing: border-box;
+            width: 100%;
+            background-color: white;
+            padding-left: .466667rem;
+            padding-top: .453333rem;
+        }
+        
+        .midBody h2 {
+            height: .466667rem;
+            font-size: .466667rem;
+            line-height: .466667rem;
+            color: #2d2d2d;
+            margin-bottom: .506667rem;
+        }
+        
+        .midBody p {
+            /* font-weight: 600; */
+            height: .4rem;
+            font-size: .4rem;
+            color: #2d2d2d;
+            line-height: .4rem;
+        }
+        
+        .imgDiv {
+            width: 100%;
+            margin-top: .226667rem;
+            margin-bottom: .466667rem;
+        }
+        
+        .midBody img {
+            display: block;
+            width: 4.133333rem;
+            height: 2.4rem;
+            margin: 0 auto;
+        }
+        
+        .confirmBtn {
+            width: 7.8rem;
+            height: 1.133333rem;
+            color: white;
+            background-color: #2dc175;
+            font-size: .48rem;
+            line-height: 1.133333rem;
+            text-align: center;
+            margin: 0 auto;
+            border-radius: .053333rem
+        }
+        
+        #idType {
+            float: right;
+            /* max-width: 80%; */
+            /* height: 100%; */
+            height: 1.2rem;
+            line-height: 1.333333rem;
+            font-size: .4rem;
+            /* font-size: .373333rem; */
+            color: black;
+            letter-spacing: .026667rem;
+            border: none;
+            text-align: right;
+            padding-right: .266667rem;
+            background-color: white;
+        }
+        
+        .subBtn {
+            height: 1.066667rem;
+            width: 7.733333rem;
+            text-align: center;
+            color: white;
+            background-color: #2dc175;
+            font-size: .4rem;
+            margin: 0 auto;
+            line-height: 1.066667rem;
+            letter-spacing: 2px;
+            border-radius: 6px;
+            margin-top: 2rem;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="topMain">
+        <span class="topLf">入驻渠道</span>
+        <div class="shu"></div><span class="topRt" style="color: gray">销售员</span>
+    </div>
+    <div class="middleMain">
+        <ul class="proList" id="qd">
+            <li>
+                <span class="fz">姓名</span>
+                <input type="text" placeholder="请输入姓名" id="CenterofCustomer">
+                <div class="tip"></div>
+            </li>
+            <li>
+                <span class="fz">密码</span>
+                <input type="password" placeholder="请输入登录密码" id="password">
+                <div class="tip"></div>
+            </li>
+            <li>
+                <span class="fz">手机号码</span>
+                <input type="text" placeholder="请输入注册的手机号码" id="contactPhone" onchange="idPhoneKeyup(this)" onkeyup="idPhoneKeyup(this)">
+                <div class="tip"></div>
+            </li>
+
+
+        </ul>
+
+        <ul id="saleuser" class="proList" style="display: none">
+            <li>
+                <span class="fz">工号</span>
+                <input type="text" id="txt_userCode" placeholder="请输入工号">
+                <div class="tip"></div>
+            </li>
+            <li>
+                <span class="fz">手机号</span>
+                <input type="text" id="txt_phone" placeholder="请输入手机号">
+                <div class="tip"></div>
+            </li>
+            <li>
+                <!-- <span class="fz">工号</span> -->
+                <input type="text" id="txt_validateCode" placeholder="验证码" style="float:left;text-align: center">
+                <button id="btu_validateCode" style="width: 35%;height: 1rem;float:right;margin: .15rem 0;" type="button" class="mui-btn mui-btn-success mui-btn-outlined">获取验证码</button>
+
+                <div class="tip"></div>
+            </li>
+
+            <!-- <div class="mui-input-row">
+                <label style="width: 23%;">工号</label>
+                <input id="txt_userCode" type="text" class="mui-input-clear" placeholder="请输入工号" style="float: left;">
+            </div> -->
+            <!-- <div class="mui-input-row">
+                <label style="width: 23%;">手机号</label>
+                <input id="txt_phone" type="text" class="mui-input-clear" placeholder="请输入手机号" style="float: left;">
+            </div> -->
+            <!-- <div class="mui-input-row">
+                <input id="txt_validateCode" style="width: 65%" type="text" placeholder="验证码">
+                <button id="btu_validateCode" style="width: 35%;line-height:1.3" type="button" class="mui-btn mui-btn-success mui-btn-outlined">
+        获取验证码
+    </button>
+            </div> -->
+            <!-- <br> -->
+            <!-- <div id="div_tip" style="color:red;margin: 5px;height: 10px;font-size: small;"></div> -->
+            <!-- <button type="button" id="btn_login" class="mui-btn mui-btn-success mui-btn-block" style="background: rgba(79, 176, 90, 1);height: 50px;">确定
+</button> -->
+        </ul>
+    </div>
+
+    <div id="subBtn" class="subBtn">下一步</div>
+    <div id="btn_login" class="subBtn" style="display: none">确定</div>
+
+
+
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/fastclick.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script>
+        $(function() {
+            FastClick.attach(document.body);
+            $('.img-product').click(function() {
+                window.location = "productShare.html";
+            });
+            $('.ins').click(function() {
+                window.location = "productShare.html";
+            });
+            $('.img-person').click(function() {
+                window.location = "myCustomer.html";
+            });
+        });
+
+        $('.delete-swipeout').click(function() {
+            $(this).parents('.weui-cell').remove()
+        })
+        $('.close-swipeout').click(function() {
+            $(this).parents('.weui-cell').swipeout('close')
+        })
+    </script>
+    <script>
+        $(function() {
+            $(".topLf").click(function() {
+                $(".topRt").css("color", "gray");
+                $(".topLf").css("color", "black");
+                $("#qd").show();
+                $("#saleuser").hide();
+                $("#subBtn").show();
+                $("#btn_login").hide();
+
+            })
+            $(".topRt").click(function() {
+                $(".topRt").css("color", "black");
+                $(".topLf").css("color", "gray");
+                $("#qd").hide();
+                $("#saleuser").show();
+                $("#subBtn").hide();
+                $("#btn_login").show();
+            })
+
+            $("#subBtn").click(function() {
+                window.location.href = "menu.1.html"
+
+            })
+        })
+
+
+        mui.init();
+        var interValObj; //timer变量，控制时间
+        var count = 60; //间隔函数，1秒执行
+        var curCount; //当前剩余秒数
+        var url = httpLocation2;
+
+        $(function() {
+            $("#btn_login").click(function() {
+                if (!checkUserCode()) {
+                    return;
+                }
+                if (!checkPhone()) {
+                    return;
+                }
+                if (!checkCode()) {
+                    return;
+                }
+                if ($("#txt_userCode").val() && $("#txt_phone").val() && $("#txt_validateCode").val()) {
+                    login();
+                } else {
+                    alert("数据格式不正确！");
+                }
+            });
+            $("#btu_validateCode").click(function() {
+                if (!checkPhone()) {
+                    return;
+                } else {
+                    getValidateCode();
+                }
+            });
+            //失去焦点之后，先验证手机号格式是否正确，再验证手机号是否绑定
+            $("#txt_phone").blur(function() {
+                var phone = $("#txt_phone").val();
+                if (phone.trim() == "" && $("#txt_phone").val().trim() == "") {
+                    return;
+                }
+                if (!(/^1[34578]\d{9}$/.test(phone))) {
+
+                    $("#div_tip").html("联系电话格式不正确");
+                    document.getElementById("txt_phone").focus();
+                    return;
+                }
+
+                $.ajax({
+                    url: httpLocation2 + "/tpwb/tpuser/checkPhone?Phone=" + phone,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(backData) {
+                        if (backData.code == 169) {
+                            mui.toast("手机号正确！");
+                        } else {
+                            $("#txt_phone").val("");
+                            document.getElementById("txt_phone").focus();
+                        }
+                    }
+                });
+
+            });
+        });
+
+        function getValidateCode() {
+            var phone = $("#txt_phone").val();
+            // 获取短信验证码
+            curCount = count;　　 //设置button效果，开始计时
+            $("#btu_validateCode").attr("disabled", "true");
+            $("#btu_validateCode").text(curCount + "秒");
+            interValObj = window.setInterval(setRemainTime, 1000); //启动计时器，1秒执行一次
+
+            $.ajax({
+                url: httpLocation2 + "/tpwb/sendCode?Phone=" + phone,
+                type: 'GET',
+                dataType: 'json',
+                // xhrFields: {
+                // withCredentials: false
+                // },
+                // headers: {
+                // 'Access-Control-Allow-Credentials' : true,
+                // 'Access-Control-Allow-Origin':'*',
+                // 'Access-Control-Allow-Methods':'GET',
+                // 'Access-Control-Allow-Headers':'application/json',
+                // },
+                success: function(backData) {
+                    if (backData.code == "1") {
+                        localStorage.clear();
+                        localStorage.setItem("sessionid", backData.sessionid.toString());
+                        var sessionid = localStorage.getItem("sessionid");
+                        mui.toast("验证码发送成功！");
+                    } else {
+                        mui.toast("验证码发送失败！");
+                    }
+                }
+            });
+
+        }
+
+        function setRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(interValObj); //停止计时器
+                $("#btu_validateCode").removeAttr("disabled"); //启用按钮
+                $("#txt_validateCode").val("");
+                $("#btu_validateCode").text("重新发送验证码");
+            } else {
+                curCount--;
+                $("#btu_validateCode").text(curCount + "秒");
+            }
+        }
+
+        function login() {
+
+            var userCode = $("#txt_userCode").val();
+            var phone = $("#txt_phone").val();
+            var validateCode = $("#txt_validateCode").val();
+            var sessionid = localStorage.getItem("sessionid");
+            //console.log(sessionid);
+            var postData = {
+                sale_jobnumber: userCode,
+                sale_phone: phone,
+                message_code: validateCode,
+                sessionid: sessionid
+            };
+
+            $.ajax({
+                url: httpLocation2 + "/tpwb/tpuser/salePersonLogin",
+                type: 'POST',
+                data: JSON.stringify(postData),
+                contentType: "application/json",
+                dataType: 'JSON',
+                success: function(backData) {
+                    if (backData.code == 0) {
+                        localStorage.clear();
+                        localStorage.setItem("sale_jobnumber", userCode);
+                        localStorage.setItem("gsuserId", backData.data.gsuserId);
+                        localStorage.setItem("sale_phone", backData.data.sale_phone);
+                        window.location = "menu.html"; //验证登录成功
+                    } else {
+                        mui.toast("登录失败！");
+                    }
+                }
+            });
+        }
+
+        function checkUserCode() {
+            var userCode = $("#txt_userCode").val();
+            if (userCode.trim() == "" && $("#txt_userCode").val().trim() == "") {
+                alert("请输入工号！");
+                $("#txt_userCode").val("");
+                document.getElementById("txt_userCode").focus();
+                return false;
+            }
+            return true;
+        }
+
+        function checkPhone() { //
+            var phone = $("#txt_phone").val();
+            if (phone.trim() == "" && $("#txt_phone").val().trim() == "") {
+                alert("请输入手机号！");
+                $("#txt_phone").val("");
+                document.getElementById("txt_phone").focus();
+                return false;
+            }
+            return true;
+        }
+
+        function checkCode() {
+            var validatcode = $("#txt_validateCode").val();
+            if (validatcode.trim() == "" && $("#txt_validateCode").val().trim() == "") {
+                alert("请输入验证码！");
+                $("#txt_validateCode").val("");
+                document.getElementById("txt_validateCode").focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+
+</html>

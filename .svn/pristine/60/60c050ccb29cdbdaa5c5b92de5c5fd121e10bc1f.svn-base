@@ -1,0 +1,477 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>保单填写</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../js/tbRem.js"></script>
+
+    <style>
+        html,
+        body {
+            font-family: "微软雅黑";
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: #2dc175;
+        }
+        
+        body {
+            box-sizing: border-box;
+            padding: .4rem;
+        }
+        
+        @font-face {
+            font-family: 'iconfont1';
+            /* project id 928328 */
+            src: url('//at.alicdn.com/t/font_928328_put7ardykji.eot');
+            src: url('//at.alicdn.com/t/font_928328_put7ardykji.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_928328_put7ardykji.woff') format('woff'), url('//at.alicdn.com/t/font_928328_put7ardykji.ttf') format('truetype'), url('//at.alicdn.com/t/font_928328_put7ardykji.svg#iconfont') format('svg');
+        }
+        
+        .white {
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        
+        .topBody {
+            width: 100%;
+            height: 2.226667rem;
+            box-sizing: border-box;
+            padding: .373333rem .4rem 0 .4rem;
+            /* background-color: aquamarine; */
+        }
+        
+        .dateBtn {
+            height: .853333rem;
+            width: 100%;
+            background-color: white;
+            /* margin-bottom: .4rem; */
+            border-bottom: 1px solid #e2e2e2;
+        }
+        
+        .dateBtn span {
+            font-size: .373333rem;
+            height: .6rem;
+            color: #4f4f4f;
+            line-height: .6rem;
+            margin-left: .16rem;
+        }
+        
+        .dateBtn button {
+            height: .586667rem;
+            box-sizing: border-box;
+            border: 1px solid #c8c8c8;
+            width: 2.333333rem;
+            float: right;
+            font-size: .32rem;
+            line-height: .346667rem;
+            margin: 0;
+            margin-left: .466667rem;
+            padding: .12rem 0;
+            color: #a0a0a0;
+        }
+        
+        .selBtn {
+            height: 1rem;
+            width: 100%;
+            background-color: white;
+            border-bottom: 1px solid #e2e2e2;
+        }
+        
+        .iconfont {
+            float: right;
+            margin-right: .133333rem;
+            font-family: "iconfont" !important;
+            font-size: .346667rem;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .selBtn button {
+            height: .973333rem;
+            color: #2dc175;
+            font-size: .373333rem;
+            line-height: .973333rem;
+            border: none;
+            padding: 0;
+            margin: 0;
+            width: 3.666667rem;
+            float: left;
+            text-align: left;
+            padding-left: .16rem;
+        }
+        
+        .searchG {
+            color: white;
+            background-color: #2dc175;
+            float: right;
+            height: .6rem;
+            width: 1.333333rem;
+            text-align: center;
+            margin: .2rem 0;
+            border-radius: 4px;
+            font-size: .373333rem;
+            line-height: .6rem;
+        }
+        
+        .tablebody {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0 .133333rem;
+            margin-top: .666667rem;
+        }
+        
+        .tableSearch {
+            border-radius: 7px;
+            border: .04rem solid #e4e4e4;
+            width: 100%;
+        }
+        
+        .tableSearch tr {
+            height: .8rem;
+        }
+        
+        .tableSearch td {
+            border: 1px solid #e4e4e4;
+            font-size: .346667rem;
+        }
+        
+        .botNav {
+            position: fixed;
+            width: 100%;
+            background-color: white;
+            bottom: 0;
+            left: 0;
+            height: 1.333333rem;
+        }
+        
+        .botNav ul li {
+            width: 33%;
+            text-align: center;
+            color: #747474;
+            float: left;
+            height: 100%;
+        }
+        
+        .botNav ul li div {
+            margin-top: 0.08rem;
+            /* font-size: .266667rem; */
+        }
+        
+        .botNav ul li span {
+            font-size: 0.44rem;
+            margin-top: 0.1rem;
+            color: #575757;
+        }
+        
+        .botNav ul li :nth-child(2) {
+            display: none;
+        }
+        
+        .ic3 {
+            font-size: .4rem;
+            color: #4c4c4c;
+            line-height: .4rem;
+            height: .4rem;
+        }
+        
+        .ic1,
+        .ic2 {
+            line-height: normal;
+        }
+        
+        .iconfont1 {
+            /* float: right; */
+            /* margin-right: .133333rem; */
+            font-family: "iconfont1" !important;
+            font-size: .6rem;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;
+            /* background-color: #f2f2f2; */
+        }
+    </style>
+
+    <body>
+        <div class="white">
+
+            <div class="topBody">
+                <div class="dateBtn">
+                    <span>起止日期</span>
+                    <button data-options='{"type":"date"}' class="edBtn chBtn" id="stopTime">结束日期<i class="iconfont">&#xe628;</i></button>
+                    <button data-options='{"type":"date"}' class="bgBtn chBtn" id="startTime">开始日期<i class="iconfont">&#xe628;</i></button>
+                </div>
+                <div class="selBtn">
+                    <button id='showUserPicker' class="" type='button'></button>
+                    <!-- <input id='showUserPicker' class="" type="button"> -->
+                    <div id='userResult' class="ui-alert"></div>
+                    <div class="searchG" id="searchBtn">查询</div>
+                </div>
+            </div>
+            <div class="tablebody" id="tableDiv" style="">
+                <table class="tableSearch" id="List">
+                    <tr>
+                        <td>渠道</td>
+                        <td>保单数量</td>
+                        <td>保费(元)</td>
+                    </tr>
+
+                    <tr>
+                        <td>合计</td>
+                        <td id="numCount"></td>
+                        <td id="priceCount"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="botNav">
+            <ul>
+                <li id="botIcon1">
+                    <div class="iconfont1 ic1">&#xe62d;</div>
+                    <div class="iconfont1 ic2">&#xe692;</div>
+                    <span>首页</span>
+                </li>
+                <li id="botIcon2">
+                    <div class="iconfont1 ic1">&#xe6d1;</div>
+                    <div class="iconfont1 ic2">&#xe6d6;</div>
+                    <span>业绩</span>
+                </li>
+                <li id="botIcon3">
+                    <div class="iconfont1 ic1">&#xe656;</div>
+                    <div class="iconfont1 ic2">&#xe6ad;</div>
+                    <span>保单</span>
+                </li>
+            </ul>
+        </div>
+
+
+
+        <!-- <button id='demo1' data-options='{}' class="btn">选择日期时间 ...</button> -->
+
+        <script src="../js/mui.min.js"></script>
+        <script type="text/javascript" src="../js/jslib/jquery-3.3.1.js"></script>
+        <script src="../js/mui.picker.js"></script>
+        <script src="../js/mui.poppicker.js"></script>
+        <script src="../js/mui.dtpicker.js"></script>
+        <script src="../js/jslib/valid.js"></script>
+        <script src="../js/jslib/common.js"></script>
+        <script>
+            (function($) {
+                $.init();
+                var result = $('#demo1')[0];
+                var btns = $('.chBtn');
+                btns.each(function(i, btn) {
+                    btn.addEventListener('tap', function() {
+                        var optionsJson = this.getAttribute('data-options') || '{}';
+                        var options = JSON.parse(optionsJson);
+                        var id = this.getAttribute('id');
+                        /*
+                         * 首次显示时实例化组件
+                         * 示例为了简洁，将 options 放在了按钮的 dom 上
+                         * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+                         */
+                        var picker = new $.DtPicker(options);
+                        picker.show(function(rs) {
+                            /*
+                             * rs.value 拼合后的 value
+                             * rs.text 拼合后的 text
+                             * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+                             * rs.m 月，用法同年
+                             * rs.d 日，用法同年
+                             * rs.h 时，用法同年
+                             * rs.i 分（minutes 的第二个字母），用法同年
+                             */
+                            btns[i].innerText = rs.text;
+
+                            /*
+                             * 返回 false 可以阻止选择框的关闭
+                             * return false;
+                             */
+                            /*
+                             * 释放组件资源，释放后将将不能再操作组件
+                             * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+                             * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+                             * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+                             */
+                            picker.dispose();
+                        });
+                    }, false);
+                });
+
+
+
+                // 下拉选择器
+                $.ready(function() {
+                    /**
+                     * 获取对象属性的值
+                     * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+                     * @param {Object} obj 对象
+                     * @param {String} param 属性名
+                     */
+                    var _getParam = function(obj, param) {
+                        return obj[param] || '';
+                    };
+
+
+                    var ProductsNames = new Array();
+
+                    function Product(value, text) {
+                        this.value = value;
+                        this.text = text;
+                    }
+                    // var GsuserId = localStorage.getItem("gsuserId");
+                    var GsuserId = 1;
+                    var postData = {
+                        gsuserId: GsuserId
+                    };
+                    $.ajax({
+                        url: httpLocation2 + "/tpwb/order/getAllProduct",
+                        type: "post",
+                        data: postData,
+                        success: function(backdata) {
+                            // alert("A");
+                            var resData = backdata.data;
+
+
+
+                            var product;
+                            for (var i in resData) {
+                                product = new Product(resData[i].insurProductsName, resData[i].insurProductsName);
+                                ProductsNames.push(product);
+                            }
+                            // alert(ProductsNames[1].text);
+
+                            var userPicker = new mui.PopPicker();
+                            // userPicker.setData([{
+                            //     value: "ywj",
+                            //     text: "旅游意外险50元"
+                            // }, {
+                            //     value: "aaa",
+                            //     text: "旅游意外险500元"
+                            // }, {
+                            //     value: "lj",
+                            //     text: "旅游意外险1000元"
+                            // },{
+                            //     value: "lj2",
+                            //     text: "旅游意外险10000元"
+                            // }
+                            // ]);
+                            //普通示例
+
+                            userPicker.setData(ProductsNames);
+                            // sconsole.log(userPicker.getSelectedItems(2));
+                            var showUserPickerButton = document.getElementById('showUserPicker');
+                            var userResult = document.getElementById('userResult');
+                            showUserPickerButton.addEventListener('tap', function(event) {
+                                userPicker.show(function(items) {
+                                    showUserPickerButton.innerText = (items[0].text);
+                                    // console.log(getSelectedItems);
+                                    //返回 false 可以阻止选择框的关闭
+                                    //return false;
+                                });
+                            }, false);
+
+                            showUserPickerButton.innerHTML = resData[0].insurProductsName;
+                            // $("#showUserPicker").innerHTML= "怎么样，改变了吧";
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {}
+                    });
+
+
+
+
+                });
+            })(mui, document);
+            var startTime = "",
+                StopTime = "";
+            $(document).ready(function() {
+                $("#searchBtn").click(
+                    function() {
+                        var productName = $("#showUserPicker").text();
+                        startTime = $("#startTime").text();
+                        stopTime = $("#stopTime").text();
+                        var postData = {
+                            ProductName: productName,
+                            StartTime: startTime,
+                            StopTime: stopTime
+                        };
+                        $.ajax({
+                            url: httpLocation2 + "/tpwb/order/getOrdersByProductName",
+                            type: "post",
+                            //data:{"customerId":1},
+                            //data: JSON.stringify(postData),
+                            data: postData,
+                            // data: {"ProductName":"旅游意外险50元"},
+                            contentType: "application/x-www-form-urlencoded",
+                            // dataType:"json",
+                            success: function(backdata) {
+                                var resData = backdata.data;
+                                var numCount = 0;
+                                var priceCount = 0;
+                                $("#tableDiv").remove();
+                                var htmlStr = "";
+                                htmlStr += '<div class="tablebody" id="tableDiv"><table class="tableSearch"><tr><td>渠道</td><td>保单数量</td><td>保费(元)</td></tr>';
+                                for (var i in resData) {
+                                    htmlStr += '<tr><td>';
+                                    htmlStr += resData[i].customerName;
+                                    htmlStr += '</td><td>';
+                                    htmlStr += resData[i].orderNum;
+                                    htmlStr += '</td><td>';
+                                    htmlStr += resData[i].insuranceMoney;
+                                    htmlStr += '</td></tr>';
+                                    numCount += resData[i].orderNum;
+                                    priceCount += resData[i].insuranceMoney;
+                                }
+                                htmlStr += '<tr><td>合计</td><td>';
+                                htmlStr += numCount;
+                                htmlStr += '</td><td>';
+                                htmlStr += priceCount;
+                                htmlStr += '</td></tr></table></div>';
+                                $(".white").append(htmlStr);
+                                // for(var i in resData)
+                                // {
+                                //     $("#customerName").text(resData[i].customerName);
+                                //     $("#orderNum").text(resData[i].orderNum);
+                                //     $("#insuranceMoney").text(resData[i].insuranceMoney);
+                                //     $("#element").clone(true).prependTo($("#List")).attr('id',i).attr("style","display:block");
+                                //     numCount += resData[i].orderNum;
+                                //     priceCount += resData[i].insuranceMoney;
+                                // }
+                                // $("#numCount").text(numCount);
+                                // $("#priceCount").text(priceCount);
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {}
+                        })
+                    }
+                );
+
+                $("#botIcon1").click(function() {
+                    window.location.href = "../views/menu.1.html"
+                    return false;
+                });
+                $("#botIcon2").click(function() {
+                    window.location.href = "../views/myPerformance.1.html"
+                    return false;
+                });
+                $("#botIcon3").click(function() {
+                    window.location.href =
+                        "../views/myPolicy.1.html"
+                    return false;
+                })
+            })
+        </script>
+    </body>
+
+</html>

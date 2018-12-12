@@ -1,0 +1,130 @@
+body {
+	font-family: "微软雅黑";
+	opacity: 1;
+	font-size: 12px;
+	font-weight: R;
+	color: rgba(48, 46, 51, 1);
+	letter-spacing: 0px;
+}
+
+.mui-content {
+	background-color: white;
+	position: absolute;
+	overflow: auto;
+	/*margin-bottom: 80px; */
+}
+
+.mui-control-content {
+	background-color: white;
+	/*min-height: 215px;*/
+}
+
+.mui-segmented-control-negative.mui-segmented-control-inverted .mui-control-item.mui-active {
+	color: rgba(79, 176, 90, 1);
+}
+
+.mui-segmented-control-negative.mui-segmented-control-inverted~.mui-slider-progress-bar {
+	background-color: rgba(79, 176, 90, 1);
+}
+
+#div-bottom {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+#item1mobile {
+	border-bottom: none;
+}
+
+#item2mobile {
+	border-bottom: none;
+	border-top: none;
+}
+
+#item3mobile {
+	border-bottom: none;
+}
+
+.div-botTitle {
+	background-color: white;
+	width: 100%;
+	/*height: 85px;*/
+	/*margin-bottom: 44px;
+	padding-bottom: 5px;
+	margin-top: 15px;*/
+	/* position: absolute; */
+	/* bottom: 44px; */
+}
+
+.div-botTitle p {
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+
+.botimg {
+	height: 40px;
+	text-align: center;
+	margin: 0 auto;
+	width: 90px;
+}
+
+.botimg img {
+	height: 100%;
+	width: 100%;
+}
+
+#item3mobile {
+	background-color: white;
+}
+
+#franchiseClause {
+	padding: 5px 15px;
+}
+
+#specialAgreement {
+	padding: 5px 15px;
+}
+
+#productOverview {
+	padding: 15px 15px;
+}
+
+.phoneimg {
+	width: 36px;
+	height: 39px;
+	opacity: 1;
+}
+
+.mui-view {
+	opacity: 1;
+	background: rgba(79, 176, 90, 1);
+	border: 1px solid rgba(79, 176, 90, 1);
+	border-radius: 5px 5px 5px 5px;
+}
+
+
+/*this for the new design*/
+
+.mui-control-item {
+	opacity: 1;
+	font-size: 16px;
+	font-family: "微软雅黑";
+	font-weight: R;
+	color: rgba(79, 176, 90, 1);
+	line-height: 12px;
+}
+
+.mui-btn-success {
+	opacity: 1;
+	background: rgba(79, 176, 90, 1);
+	margin: 6px 14px;
+	font-size: 18px;
+	font-family: "微软雅黑";
+	font-weight: R;
+	color: rgba(255, 255, 255, 1);
+	line-height: 12px;
+	letter-spacing: 0px;
+}

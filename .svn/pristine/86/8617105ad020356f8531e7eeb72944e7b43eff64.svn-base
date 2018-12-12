@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>产品列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../js/tbRem.js"></script>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style lang="">
+        html,
+        body {
+            font-family: "微软雅黑";
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+        
+        .proList {
+            box-sizing: border-box;
+            margin-top: .506667rem;
+            width: 100%;
+            background-color: white;
+            padding: 0 .466667rem;
+        }
+        
+        .proList li {
+            width: 100%;
+            height: 1.266667rem;
+            border-bottom: .066667rem solid #f2f2f2;
+        }
+        
+        .proList li:nth-last-child(1) {
+            border: none
+        }
+        
+        .proList li .fz {
+            float: left;
+            max-width: 80%;
+            height: 100%;
+            line-height: 1.266667rem;
+            font-size: .426667rem;
+            color: black;
+            letter-spacing: .026667rem;
+        }
+        
+        .iconCus {
+            margin: .3rem 0;
+            float: right;
+            background-image: url("../images/list/Cus.png");
+            background-size: 100%;
+            height: .533333rem;
+            width: .533333rem;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <ul class="proList" id="productList">
+        <!--<li>
+            <a class="fz" href="productDetails.html">旅行意外险50元</a>
+            <div href="myCustomer_copy.html" class="iconCus"></div>
+        </li>
+        <li>
+            <a class="fz" href="productDetails.html">旅行意外险100元</a>
+            <div href="myCustomer_copy.html" class="iconCus"></div>
+        </li>
+        <li>
+            <a class="fz" href="productDetails.html">旅行意外险150元</a>
+            <div href="myCustomer_copy.html" class="iconCus"></div>
+        </li>-->
+    </ul>
+
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/fastclick.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/jslib/common.js"></script>
+    <script>
+        //var url=httpLocation2;
+    	$(function() {
+
+				// var Gs_Id = 1;//localStorage.getItem("获取session中gs_id")
+                var GsuserId=localStorage.getItem("gsuserId");
+                var id=GsuserId;
+				var postData = {
+                    id: GsuserId
+				};
+				mui.ajax({
+					url: httpLocation2+"/tpwb/product/getProducts",
+					type: 'GET',
+					data: postData,
+					/*contentType: "application/json;charset=utf-8",*/
+					dataType: 'json',
+					success: function(backdata) {
+						var resData = backdata.data;
+						var htmlStr = " ";
+						for(var i in resData) {
+                           /* htmlStr+='<li id='+resData[i].productId+'>'+
+                                '<a class="fz" href="javascript:void(0);" onclick="window.location.href=productShare.html?productId='+resData[i].productId+'">'+resData[i].insurProductsName+'</a>' +
+                                '<a class="iconCus" href="javascript:void(0);" onclick="window.location.href=myCustomer.html?productId='+resData[i].productId+'"></a>' +
+                                '</li>';*/
+                            htmlStr += '<li id=' + resData[i].productId + '>';
+                            htmlStr += '<a class="fz" href="javascript:void(0);">'+resData[i].insurProductsName+'</a>' ;
+                            htmlStr += '<a href="myCustomer.html?ProductId='+resData[i].productId+'" class="iconCus">' + '</a>' + '</li>';
+						}
+						$("#productList").append(htmlStr);
+
+					},
+				})
+
+           /* function tiaozhuan(productId){
+                window.location.href = "productShare.html?productId="+productId;
+            }
+            function tiaozhuan2(productId){
+                window.location.href = "myCustomer.html?productId="+productId;
+            }*/
+
+
+			});
+
+//			function jump(Id) {
+//				//打开页面
+//				var product_Id = Id;
+//				mui.openWindow({
+//					url: 'productShare.html',
+//					id: 'productShare',
+//					extras: { //传递参数
+//						productId: product_Id
+//					},
+//					show: {
+//						aniShow: 'none' //页面显示动画，默认为”slide-in-right“；						
+//					}
+//				});
+//			}
+//			function tiaozhuan(Id) {
+//				//打开页面
+//				var productId =Id; //获取保险产品的id
+//				mui.openWindow({
+//					url: 'myCustomer.html',
+//					id: 'myCustomer',
+//					extras: { //传递参数
+//						productId: productId
+//					},
+//					show: {
+//						aniShow: 'none' //页面显示动画，默认为”slide-in-right“；						
+//					}
+//				});
+//			}
+   </script>
+</body>
+
+</html>

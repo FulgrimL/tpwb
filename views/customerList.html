@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>渠道列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../js/tbRem.js"></script>
+    <script src="../js/jslib/common.js"></script>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style lang="">
+        html,
+        body {
+            font-family: "微软雅黑";
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+        
+        .proList {
+            box-sizing: border-box;
+            margin-top: .506667rem;
+            width: 100%;
+            background-color: white;
+            padding: 0 .466667rem;
+        }
+        
+        .proList li {
+            width: 100%;
+            height: 1.266667rem;
+            border-bottom: .066667rem solid #f2f2f2;
+        }
+        
+        .proList li:nth-last-child(1) {
+            border: none
+        }
+        
+        .proList li .fz {
+            float: left;
+            max-width: 80%;
+            height: 100%;
+            line-height: 1.266667rem;
+            font-size: .426667rem;
+            color: black;
+            letter-spacing: .026667rem;
+        }
+        
+        .iconCus {
+            margin: .426667rem 0;
+            float: right;
+            background-image: url("../images/list/Cus.png");
+            background-size: 100%;
+            height: .426667rem;
+            width: .426667rem;
+        }
+        
+        .iconfont {
+            float: right;
+            margin-right: .133333rem;
+            font-family: "iconfont" !important;
+            font-size: .346667rem;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.266667rem
+        }
+        
+        .fixSure {
+            position: fixed;
+            z-index: 10;
+            height: 1.2rem;
+            width: 1.2rem;
+            background-image: url("../images/icon/addIcon.png");
+            background-size: 100% 100%;
+            bottom: .666667rem;
+            right: .666667rem;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <ul class="proList" id="cardList">
+        <!--<li>
+            <a class="fz" href="productSelect_copy.html">襄阳旅行团</a>
+            <i class="iconfont">&#xe636;</i>
+        </li>
+        <li>
+            <a class="fz" href="productSelect_copy.html">武汉旅行团</a>
+            <i class="iconfont">&#xe636;</i>
+        </li>
+        <li>
+            <a class="fz" href="productSelect_copy.html">十堰旅行团</a>
+            <i class="iconfont">&#xe636;</i>
+        </li>-->
+    </ul>
+    <div class="fixSure">
+
+    </div>
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/fastclick.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script>
+    	$(function() {
+            var gsuserId=localStorage.getItem("gsuserId");
+           /* var GsuserId=localStorage.getItem("gsuserId");*/
+            console.log(gsuserId);
+			var postData = {
+				gsuserId: gsuserId
+			};
+			mui.ajax({
+				url: httpLocation2+"/tpwb/customers/getCustomers",
+				type: 'POST',
+				data: JSON.stringify(postData),
+				contentType: "application/json;charset=utf-8",
+				dataType: 'json',
+				success: function(backdata) {
+					var resData = backdata.data;
+					var htmlStr = " ";
+					for(var i in resData) {
+                        htmlStr += '<li id=' + resData[i].customerId + ' onclick=tiaozhuan('+resData[i].customerId+') >';
+                        htmlStr += '<span class="fz" >'+resData[i].customerName+'</span>';
+                        htmlStr += '<i class="iconfont">' +'&#xe636;' + '</i>' + '</li>';
+					}
+					$("#cardList").append(htmlStr);
+				},
+			})
+
+		});
+		
+		 
+        $(".fixSure").click(function() {
+            window.location.href = "addCustomer.html";
+        })
+
+        function tiaozhuan(customerId){
+            window.location.href = "productSelect.html?CustomerId="+customerId;
+
+        }
+    </script>
+    <!--<script>
+        $(function() {
+            FastClick.attach(document.body);
+            $('.img-product').click(function() {
+                window.location = "productShare.html";
+            });
+            $('.ins').click(function() {
+                window.location = "productShare.html";
+            });
+            $('.img-person').click(function() {
+                window.location = "myCustomer.html";
+            });
+        });
+
+        $('.delete-swipeout').click(function() {
+            $(this).parents('.weui-cell').remove()
+        })
+        $('.close-swipeout').click(function() {
+            $(this).parents('.weui-cell').swipeout('close')
+        })
+    </script>-->
+    <!--<script>
+        $(function() {
+            $(".fz").parent().click(function() {
+                window.location.href = "productSelect_copy.html";
+            })
+        })
+
+        function addCus() {
+            window.location.href = "addCustomer_copy.html"
+        }
+    </script>-->
+</body>
+
+</html>

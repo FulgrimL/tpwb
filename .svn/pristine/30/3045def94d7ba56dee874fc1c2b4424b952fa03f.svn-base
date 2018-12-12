@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>首页</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../css/base.1.css">
+    <link rel="stylesheet" href="../css/mui.css">
+    <script src="../js/tbRem.js"></script>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style lang="">
+        html,
+        body {
+            font-family: "微软雅黑";
+            background-size: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: #f2f2f2;
+        }
+        
+        body {
+            /* background-image: url("../images/icon/mainBg.jpg"); */
+            background-color: #f2f2f2;
+            background-position: bottom left;
+            background-repeat: no-repeat;
+        }
+        
+        .iconfont {
+            /* float: right; */
+            /* margin-right: .133333rem; */
+            font-family: "iconfont" !important;
+            font-size: .6rem;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;
+            /* background-color: #f2f2f2; */
+        }
+        
+        .main {
+            margin-top: .333333rem;
+            background-color: white;
+        }
+        
+        .topNav {
+            height: 1.333333rem;
+            border-bottom: 1px solid #dbdbdb;
+            position: relative;
+        }
+        
+        .navList {
+            width: 100%;
+            box-sizing: border-box;
+            height: 100%;
+            padding: 0 .266667rem;
+        }
+        
+        .navList ul {
+            width: 100%;
+            height: 100%;
+            ;
+        }
+        
+        .navList ul li {
+            width: 100%;
+            height: 2.933333rem;
+            /* float: left; */
+        }
+        
+        .imgDiv {
+            /* height: 1.8666rem; */
+            height: 1.9rem;
+            margin: .5rem 0;
+            background-color: blue;
+            float: left;
+        }
+        
+        .imgDiv img {
+            /* height: 1.8666rem;
+            width: 1.8666rem; */
+            height: 1.9rem;
+            width: 1.9rem;
+        }
+        
+        .liRight {
+            height: 1.8666rem;
+            padding: .533333rem 0;
+            float: right;
+            /* background-color: aqua; */
+            width: 7.386667rem;
+            border-bottom: 1px solid #dbdbdb;
+            box-sizing: content-box;
+        }
+        
+        .liRTop {
+            width: 100%;
+            height: .426667rem;
+            float: left;
+        }
+        
+        .spanLT {
+            height: .426667rem;
+            line-height: .426667rem;
+            padding-left: .053333rem;
+            float: left;
+            border-left: 8px solid #40d19a;
+            font-size: .4rem;
+            color: #4d4d4d;
+            /* letter-spacing: 1px; */
+        }
+        
+        .spanRT {
+            color: #ff5000;
+            font-size: .32rem;
+            float: right;
+            line-height: .426667rem
+        }
+        
+        .liRBot {
+            height: .466667rem;
+            padding-left: .173333rem;
+            float: left;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        
+        .spanNum {
+            font-size: .466667rem;
+            line-height: .466667rem;
+            color: #ff5000;
+            float: left;
+        }
+        
+        .spanNR {
+            float: left;
+            font-size: .293333rem;
+            height: .466667rem;
+            padding-top: .133333rem;
+            line-height: .293333rem;
+            color: #ff5000;
+        }
+        
+        .liMid {
+            height: 1rem;
+            font-size: .373333rem;
+            line-height: 1.053333rem;
+            color: #666666;
+            float: left;
+            padding-left: .173333rem;
+            overflow: hidden;
+        }
+        
+        .liRBot button {
+            border: 1px solid #40d19a;
+            color: #40d19a;
+            background-color: white;
+            border-radius: 7px 0 7px 0;
+            float: right;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .botNav {
+            position: fixed;
+            width: 100%;
+            background-color: white;
+            bottom: 0;
+            left: 0;
+            height: 1.333333rem;
+        }
+        
+        .botNav ul li {
+            width: 33%;
+            text-align: center;
+            color: #747474;
+            float: left;
+            height: 100%;
+        }
+        
+        .botNav ul li div {
+            margin-top: 0.08rem;
+            /* font-size: .266667rem; */
+        }
+        
+        .botNav ul li span {
+            font-size: 0.44rem;
+            margin-top: 0.1rem;
+            color: #575757;
+        }
+        
+        .botNav ul li :nth-child(2) {
+            display: none;
+        }
+        
+        #saleBtn {
+            border: 1px solid #40d19a;
+            color: #40d19a;
+            background-color: white;
+            border-radius: 7px 0 7px 0;
+            float: right;
+            font-weight: normal;
+            letter-spacing: 1px;
+            padding: 0;
+            height: .56rem;
+            line-height: .56rem;
+            font-size: .32rem;
+            width: 1.68rem;
+            text-align: center
+        }
+        
+        #prdList {
+            position: absolute;
+            left: .266667rem;
+            top: .42rem;
+            font-size: .4rem;
+            color: #4c4c4c;
+            line-height: .4rem;
+            height: .4rem;
+            letter-spacing: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 3rem;
+        }
+        
+        #prdList1 {
+            position: absolute;
+            left: 4.4rem;
+            top: .42rem;
+            font-size: .4rem;
+            color: #4c4c4c;
+            line-height: .4rem;
+            height: .4rem;
+            letter-spacing: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 4rem;
+        }
+        
+        .mui-popover {
+            height: 4rem;
+            /* overflow: scroll; */
+        }
+        
+        .ic3 {
+            font-size: .4rem;
+            color: #4c4c4c;
+            line-height: .4rem;
+            height: .4rem;
+        }
+        
+        .ic1,
+        .ic2 {
+            line-height: normal;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="topNav"><a id="prdList" href="#middlePopover">保险产品<div class="iconfont ic3" style="display: inline;">&#xe6cc;</div></a><a id="prdList1" href="#middlePopover1">保险公司
+            <div class="iconfont ic3" style="display: inline;">&#xe6cc;</div>
+        </a></div>
+        <div class="navList">
+            <ul>
+                <li>
+                    <div class="imgDiv"><img src="../images/11.jpg" alt="" srcset=""></div>
+                    <div class="liRight">
+                        <div class="liRTop"><span class="spanLT">尊享如意卡</span><span class="spanRT">推广费25%</span></div>
+                        <span class="liMid">50万身故/伤残+5万意外医疗+200元住院津贴</span>
+                        <div class="liRBot"><span class="spanNum">55</span><span class="spanNR">元起</span>
+                            <button id="saleBtn">立即购买</button></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="imgDiv"><img src="../images/11.jpg" alt="" srcset=""></div>
+                    <div class="liRight">
+                        <div class="liRTop"><span class="spanLT">尊享如意卡</span><span class="spanRT">推广费25%</span></div>
+                        <span class="liMid">50万身故/伤残+5万意外医疗+200元住院津贴</span>
+                        <div class="liRBot"><span class="spanNum">55</span><span class="spanNR">元起</span>
+                            <button id="saleBtn">立即购买</button></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="imgDiv"><img src="../images/11.jpg" alt="" srcset=""></div>
+                    <div class="liRight">
+                        <div class="liRTop"><span class="spanLT">尊享如意卡</span><span class="spanRT">推广费25%</span></div>
+                        <span class="liMid">50万身故/伤残+5万意外医疗+200元住院津贴</span>
+                        <div class="liRBot"><span class="spanNum">55</span><span class="spanNR">元起</span>
+                            <button id="saleBtn">立即购买</button></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="botNav">
+        <ul>
+            <li id="botIcon1">
+                <div class="iconfont ic1">&#xe692;</div>
+                <div class="iconfont ic2">&#xe62d;</div>
+                <span>首页</span>
+            </li>
+            <li id="botIcon2">
+                <div class="iconfont ic1">&#xe6d6;</div>
+                <div class="iconfont ic2">&#xe6d1;</div>
+                <span>业绩</span>
+            </li>
+            <li id="botIcon3">
+                <div class="iconfont ic1">&#xe656;</div>
+                <div class="iconfont ic2">&#xe6ad;</div>
+                <span>保单</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 弹出菜单 -->
+    <div id="middlePopover" class="mui-popover">
+        <div class="mui-popover-arrow"></div>
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell" onclick="tcPrd(this)">
+                        <a href="#">全部</a>
+                    </li>
+                    <li class="mui-table-view-cell" onclick="tcPrd(this)"><a href="#">尊享如意卡</a>
+                    </li>
+                    <li class="mui-table-view-cell" onclick="tcPrd(this)"><a href="#">国寿全家福</a>
+                    </li>
+                    <li class="mui-table-view-cell" onclick="tcPrd(this)"><a href="#">安心金卡</a>
+                    </li>
+                    <li class="mui-table-view-cell" onclick="tcPrd(this)"><a href="#">安心银卡</a>
+                    </li>
+                    <li class="mui-table-view-cell" onclick="tcPrd(this)"><a href="#">安心福卡</a>
+                    </li>
+                    <li class="mui-table-view-cell" onclick="tcPrd(this)"><a href="#">悦享全家福</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="middlePopover1" class="mui-popover">
+        <div class="mui-popover-arrow"></div>
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <a href="#" onclick="tcCom(this)">全部</a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a href="#" onclick="tcCom(this)">中国人寿保险公司湖北分公司</a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a href="#" onclick="tcCom(this)">中国人寿保险公司武汉分公司</a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a href="#" onclick="tcCom(this)">中国人寿保险公司黄石分公司</a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a href="#" onclick="tcCom(this)">中国人寿保险公司十堰分公司</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../js/fastclick.js"></script>
+    <script src="../js/jquery-weui.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script>
+        // $(function() {
+        //     $(".botNav").find("ul").find("li").find(".iconfont").click(function() {
+        //         console.log($(this).index());
+        //         $(".ic1").show();
+        //         $(".ic2").hide();
+        //         $(this).hide();
+        //         $(this).siblings().show();
+        //     })
+        // })
+        mui('.mui-scroll-wrapper').scroll();
+
+        function tcPrd(a) {
+            var txt = $(a).text();
+            $("#prdList").html(txt + '<div class="iconfont ic3" style="display: inline;">&#xe6cc;</div>');
+            $(".mui-backdrop").hide();
+            $("#middlePopover").hide().removeClass("mui-active");
+            mui.init();
+        }
+
+        function tcCom(a) {
+            var txt = $(a).text();
+            $("#prdList1").html(txt + '<div class="iconfont ic3" style="display: inline;">&#xe6cc;</div>');
+            $(".mui-backdrop").hide();
+            $("#middlePopover1").hide().removeClass("mui-active");
+            mui.init();
+        }
+        $(function() {
+            $(".navList").find("ul").find("li").click(function() {
+
+                window.location.href = "http://ubedt.e-chinalife.com/gskdh6/app/views/Wxshow.html?prdId=3&userId=13&from=singlemessage"
+                return false;
+            })
+            $("#saleBtn").click(function() {
+                window.location.href = "http://ubedt.e-chinalife.com/gskdh6/app/views/wxcard.html?prdId=3&wxcardNo=13&userCardno=42071170711666&region=JCEDTUB"
+                return false;
+            })
+            $("#botIcon1").click(function() {
+                window.location.href = "../views/menu.1.html"
+                return false;
+            });
+            $("#botIcon2").click(function() {
+                window.location.href = "../views/myPerformance.1.html"
+                return false;
+            });
+            $("#botIcon3").click(function() {
+                window.location.href =
+                    "../views/myPolicy.1.html"
+                return false;
+            })
+
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,660 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>保单填写</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
+    <link rel="stylesheet" href="../css/all.css" />
+    
+    <script src="../js/mui.min.js"></script>
+    <script type="text/javascript" src="../js/jslib/jquery-3.3.1.js"></script>
+    <script src="../js/mui.picker.js"></script>
+    <script src="../js/mui.poppicker.js"></script>
+    <script src="../js/mui.dtpicker.js"></script>
+    <script src="../js/jslib/valid.js"></script>
+    <script src="../js/jslib/common.js"></script>
+    <script>
+        var Premium;
+    	//将产品信息回填到客户详情编辑页面
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+		$(function(){
+            var ID = GetRequest();
+// 			var postData={
+// //					customerId:Cus_Id['Customer_Id']
+// 					productId:ID['productId']
+// //					productId:Pro_Id['Product_Id']
+// 			};
+           /* alert(ID['productId']);*/
+			mui.ajax({
+                url: httpLocation2+"/tpwb/product/showproductinfo?ProductId="+ID['productId'],
+                type: 'POST',
+
+                contentType: "application/json;charset=utf-8",
+                dataType: 'json',
+                success: function(backdata) {
+                    var resData=backdata.data;
+                    /*alert("b");*/
+    				if(backdata.code=="0")
+    				{
+    				    /*alert(resData.insurProductsName);*/
+    					var resData = backdata.data;
+    					$("#insurProductsName").attr("value",resData.insurProductsName);
+    					$("#repairRegulation").attr("value",resData.repairRegulation);
+    					$("#premium").attr("value",resData.premium+"元");
+                        Premium=resData.premium;
+    					var str=resData.repairRegulation;
+					    var sts=str.split(',');
+					    var html="";
+					    for (var i=0;i<sts.length;i++){
+					    	html=html+'<p  style="border:0px;font-family: \'微软雅黑\';" >'+(i+1)+'.'+sts[i]+'</p>';
+					    }
+					    $("#repairRegulation").append(html);
+    				}
+                },
+			})
+		})
+    </script>
+<body>
+    <div class="mui-content title-row">
+        <ul class="mui-table-view" ;>
+            <li class="mui-table-view-cell row-tit1">
+            	<div style="float: left;">
+            		<img src="../images/order/expand.png" class="icon-title"/>
+            	</div>
+                <div class="text-title">产品信息</div>
+                <div style="text-align: right;">
+                    <img src="../images/order/icon_share.png" width="22px" />
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="text">产品名称</div>
+                <input class="text2" style="border:0px;font-family: '微软雅黑';color: #169F5C;" id="insurProductsName"></input>
+            </li>
+            <li class="mui-table-view-cell mui-collapse"> 
+                <a class="mui-navigate-right" href=" "><span class="text">保险责任</span></a>
+                <div class="mui-collapse-content" class="text" id="repairRegulation">
+                    <!--<p id="InsuranceLia">1.搭乘和驾驶非营运机车</p>-->
+                    <!--<p  style="border:0px;font-family: '微软雅黑';" >21331</p>-->
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="text">保险费</div>
+                <input class="text2" style="border:0px;font-family: '微软雅黑';" id="premium"></input>
+            </li>
+            <li class="mui-table-view-cell chooseDate">
+                <div class="text" style="margin-top: 4px;">生效日期</div>
+                <div class="text2 buttonSty2">
+                    <button id="startTime" data-options='{"type":"date","beginYear":2018,"endYear":2050}' class="btn mui-btn mui-btn-block">选择日期 
+						</button>
+                </div>
+                <div id='result1' class="ui-alert" style="float: right;margin-top: 5px;"></div>
+
+            </li>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="text">保险期间</div>
+                <div class="text2" id="duringtime">1年</div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="text">终止日期</div>
+                <span id="stopTime" style="float: right;" class="sss"></span> 
+            </li>
+        </ul>
+
+        <ul class="mui-table-view row-tit">
+            <li class="mui-table-view-cell text4 row-tit1"> 
+            	<div style="float: left;">
+            		<img src="../images/order/expand.png" class="icon-title"/>
+            	</div>
+            	<span>投保人信息</span>
+            </li>
+            <li class="mui-table-view-cell">
+            	<div style="float: left;"> 
+            		<img src="../images/order/xing8.png" class="xing"/>
+            	</div>
+                <div class="text">姓名</div>
+                <div class="text3">
+                    <input id="policyName" value="" type="text" style="border: none;text-align: right;margin-top:-6px;margin-right: -20px;" placeholder="（必填）" onchange="IsEmpty(this)" onkeyup="IsEmpty(this)">
+                </div>
+            </li>
+            <div class="tip"></div>
+            <li class="mui-table-view-cell chooseDate"> 
+                <div class="text" style="margin-top: 4px;">证件类型</div>
+                <div class="text2 buttonSty1">
+                    <!--<button id='subinvman_sel1' class="mui-btn mui-btn-block button-color" type='button' name="info[1]" value="5万" data-setmeal="5万,10万,15万,20万,30万,50万">-->
+                    	<!--<span style="color: #169F5C;">身份证</span>-->
+                    	 <!--<input type="button" class="select_set" name="info[1]" value="5万" data-setmeal="5万,10万,15万,20万,30万,50万">-->
+                    	<!--<img src="../images/arrow_down.png" class="arrow-down"/>-->
+                    <!--</button>-->
+                    <i class="arrow-down">
+                    	<img src="../images/order/arrow_down.png" style="width: 15px;margin-top: 7px;"/>
+                    </i>
+                    <input id="policyType" class="select_set" readonly="readonly" name="info[1]" value="身份证" data-setmeal="身份证,其他（个人）,护照,军人证,在华居住证">
+					
+                </div>
+               
+                <!--<div id='userResult' class="ui1-alert"></div>-->
+            </li>
+            <li class="mui-table-view-cell">
+            	<div style="float: left;"> 
+            		<img src="../images/order/xing8.png" class="xing"/>
+            	</div>
+                <div class="text">证件号码</div>
+                <div class="text3">
+                    <input id="policyCID" value="" type="text" id="IDipt1" onchange="idCardKeyup(this)" onkeyup="idCardKeyup(this)" style="border: none;text-align: right;margin-top:-6px;margin-right: -20px;" placeholder="（必填）">
+                </div>
+            </li>
+            <div class="tip"></div>
+            <li class="mui-table-view-cell chooseDate">
+                <div class="text" style="margin-top: 4px;">出生日期</div>
+                <div class="text2 buttonSty2">
+                    <button id="policyDateofbirth1" data-options='{"type":"date","beginYear":1900,"endYear":2018}' class="btn mui-btn mui-btn-block">选择日期 
+						</button>
+                </div>
+                <div id='result2' class="ui-alert" style="float: right;margin-top: 5px;"></div>
+
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="text">性别</div>
+                <div class="text2">
+                    <input id="SexM1" name="sexP" type="radio" checked="checked" value="男"/>男
+                    <input id="SexW1" name="sexP" type="radio" value="女"/>女
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+            	<div style="float: left;"> 
+            		<img src="../images/order/xing8.png" class="xing"/>
+            	</div>
+                <div class="text">手机号</div>
+                <div class="text3">
+                    <input id="policyPhone" value="" type="text" style="border: none;text-align: right;margin-top:-6px;margin-right: -20px;" onchange="idPhoneKeyup(this)" onkeyup="idPhoneKeyup(this)" placeholder="（必填）">
+                </div>
+            </li>
+            <div class="tip"></div>
+        </ul>
+
+        <ul class="mui-table-view row-tit">
+            <li class="mui-table-view-cell text4 row-tit1">
+            	<div style="float: left;">
+            		<img src="../images/order/expand.png" class="icon-title"/>
+            	</div>
+            	<span>被保人信息</span>
+            </li>
+            <li class="mui-table-view-cell">
+            	<div style="float: left;"> 
+            		<img src="../images/order/xing8.png" class="xing"/>
+            	</div>
+                <div class="text">姓名</div>
+                <div class="text3">
+                    <input id="insuredName" value="" type="text" style="border: none;text-align: right;margin-top:-6px;margin-right: -20px;" placeholder="（必填）" onchange="IsEmpty(this)" onkeyup="IsEmpty(this)">
+                </div>
+            </li>
+            <div class="tip"></div>
+            <li class="mui-table-view-cell chooseDate">
+                <div class="text" style="margin-top: 4px;">证件类型</div>
+				<div class="text2 buttonSty1">
+                    <!--<button id='subinvman_sel' class="mui-btn mui-btn-block button-color" style="color: #169F5C;" type='button'>
+                    	<span style="color: #169F5C;">身份证</span>
+                    	<img src="../images/arrow_down.png" class="arrow-down"/>
+                    </button>-->
+                    <i class="arrow-down">
+                    	<img src="../images/order/arrow_down.png" style="width: 15px;margin-top: 7px;"/>
+                    </i>
+                    <input id="insuredType" class="select_set" readonly="readonly" name="info[1]" value="身份证" data-setmeal="身份证,其他（个人）,护照,军人证,在华居住证">
+                </div>
+                <!--<div id='userResult1' class="ui1-alert"></div>-->
+            </li>
+            <li class="mui-table-view-cell">
+            	<div style="float: left;"> 
+            		<img src="../images/order/xing8.png" class="xing"/>
+            	</div>
+                <div class="text">证件号码</div>
+                <div class="text3">
+                    <input id="insuredCID" value="" type="text" id="IDipt2" onchange="idCardKeyup(this)" onkeyup="idCardKeyup(this)" style="border: none;text-align: right;margin-top:-6px;margin-right: -20px;" placeholder="（必填）">
+                </div>
+            </li>
+            <div class="tip"></div>
+            <li class="mui-table-view-cell chooseDate">
+                <div class="text" style="margin-top: 4px;">出生日期</div>
+                <div class="text2 buttonSty2">
+                    <button id="insuredDateofbirth1" data-options='{"type":"date","beginYear":1900,"endYear":2018}' class="btn mui-btn mui-btn-block">选择日期 
+						</button>
+                </div>
+                <div id='result3' class="ui-alert" style="float: right;margin-top: 5px;"></div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="text">性别</div>
+                <div class="text2">
+                    <input name="sexS" type="radio" checked="checked" value="男"/>男
+                    <input name="sexS" type="radio" value="女"/>女
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+            	<div style="float: left;"> 
+            		<img src="../images/order/xing8.png" class="xing"/>
+            	</div>
+                <div class="text">手机号</div>
+                <div class="text3">
+                    <input id="insuredPhone" value="" type="text" style="border: none;text-align: right;margin-top:-6px;margin-right: -20px;" onchange="idPhoneKeyup(this)" onkeyup="idPhoneKeyup(this)" placeholder="（必填）">
+                </div>
+            </li>
+            <div class="tip"></div>
+            <li class="mui-table-view-cell">
+                <div class="text">与投保人关系</div>
+                <div class="text2 buttonSty1">
+                    <i class="arrow-down">
+                    	<img src="../images/order/arrow_down.png" style="width: 15px;margin-top: 7px;"/>
+                    </i>
+                    <input id="relation" class="select_set" readonly="readonly" name="info[1]" value="本人" data-setmeal="本人,父母,配偶,子女">
+					
+                </div>
+            </li>
+        </ul>
+
+        <ul class="mui-table-view row-tit">
+            <li class="mui-table-view-cell text4 row-tit1">
+            	<div style="float: left;">
+            		<img src="../images/order/expand.png" class="icon-title"/>
+            	</div>
+            	<span>旅游信息</span>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="text">旅游出发地</div>
+                <div class="text3">
+                    <input id="travelStart" type="text" style="border: none;text-align: right;margin-top:-6px;margin-right: -20px;" placeholder="（选填）">
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="text">旅游目的地</div>
+                <div class="text3">
+                    <input id="travelDestnation" type="text" style="border: none;text-align: right;margin-top:-6px;margin-right: -20px;" placeholder="（选填）">
+                </div>
+            </li>
+            <li class="mui-table-view-cell">
+                <div class="text">旅游时间</div>
+                <div class="text3">
+                    <input id="travelTime" type="text" style="border: none;text-align: right;margin-top:-6px;margin-right: -20px;" placeholder="（选填）">
+                </div>
+            </li>
+        </ul>
+
+        <div style="width: 100%;">
+            <button type="button" id="sureBtn">
+            	<span class="sureBtn">确认</span>
+            </button>
+        </div>
+    </div>
+	
+
+    
+    
+    <script>
+    	
+    	
+    	$(".select_set").each(function(){
+		    var that = $(this);
+		    var that_values = that.attr("data-setmeal");
+		    
+		    var oldArr = that_values.split(",");
+		    var newArr = [];
+		    var picker = new mui.PopPicker(); 
+		    for(var i=0,length=oldArr.length;i<length;i++){
+		    	
+		        newArr.push({value:oldArr[i],text:oldArr[i]});
+		    }
+		    picker.setData(newArr); 
+		    that.on('tap', function() {
+		    	var id=$(this)[0].getAttribute('id');
+		    	
+		        picker.show(function(items) {
+		        	if (id=="policyType"){
+		        		policyType=items[0].value;
+		        	}
+		        	if (id=="insuredType"){
+		        		insuredType=items[0].value;
+		        	}
+		        	if (id=="relation"){
+		        		relation=items[0].value;
+		        	}
+		        	
+		            that.val(items[0].value);
+		        });
+		    })
+		});
+    </script>
+    
+    
+    <script type="text/javascript">
+        mui.init()
+        function tiaozhuan(){
+		    window.location.href='orderPay.html';
+		}
+    </script>
+    <script>
+        mui('.mui-scroll-wrapper').scroll({
+            scrollY: true, //是否竖向滚动
+            scrollX: false, //是否横向滚动
+        });
+    </script>
+    
+    <script>
+    	var startTime="",stopTime="",policyDateofbirth1="",insuredDateofbirth1="",policyType="身份证",insuredType="身份证",relation="本人";
+        (function($) {
+            $.init();
+            //50716354
+            var btns = $('.btn');
+            btns.each(function(i, btn) {
+                if (i == 0) {
+                    var result = $('.ui-alert')[i].previousElementSibling.firstChild.nextSibling;
+                    // result = result.firstChild;
+//                  var span = $('#spantext')[i];
+                    var span = $('#stopTime')[i];
+                    
+                    btn.addEventListener('tap', function() {
+                        var _self = this;
+                        if (_self.picker) {
+                            _self.picker.show(function(rs) {
+                                result.innerHTML = rs.text;
+                                _self.picker.dispose();
+                                _self.picker = null;
+
+
+                            });
+                        } else {
+                        	
+                            var optionsJson = this.getAttribute('data-options') || '{}';
+                            var options = JSON.parse(optionsJson);
+                            var id = this.getAttribute('id');
+                            /*
+                             * 首次显示时实例化组件
+                             * 示例为了简洁，将 options 放在了按钮的 dom 上
+                             * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+                             */
+                            _self.picker = new $.DtPicker(options);
+                            _self.picker.show(function(rs) {
+                                /*
+                                 * rs.value 拼合后的 value
+                                 * rs.text 拼合后的 text
+                                 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+                                 * rs.m 月，用法同年
+                                 * rs.d 日，用法同年
+                                 * rs.h 时，用法同年
+                                 * rs.i 分（minutes 的第二个字母），用法同年
+                                 */
+                                result.innerHTML = rs.text;
+                                startTime=rs.text;
+//                              alert(startTime)
+                                
+                                var value = document.getElementById("duringtime").innerHTML.substring(0, 1);
+                                span.innerText = (parseInt(rs.y.value) + parseInt(value)) + "-" + rs.m.value + "-" + (rs.d.value - 1);
+                                stopTime=span.innerText;
+                                /* 
+                                 * 返回 false 可以阻止选择框的关闭
+                                 * return false;
+                                 */
+                                /*
+                                 * 释放组件资源，释放后将将不能再操作组件
+                                 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+                                 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+                                 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+                                 */
+                                _self.picker.dispose();
+                                _self.picker = null;
+
+                            });
+                        }
+                    }, false);
+                } else {
+                    // var result = $('.ui-alert')[i];
+                    var result = $('.ui-alert')[i].previousElementSibling.firstChild.nextSibling;
+					
+                    //alert(i);
+                    btn.addEventListener('tap', function() {
+                        var _self = this;
+                        if (_self.picker) {
+                            _self.picker.show(function(rs) {
+                                result.innerText = rs.text;
+                                _self.picker.dispose();
+                                _self.picker = null;
+
+
+                            });
+                        } else {
+                        	
+                            var optionsJson = this.getAttribute('data-options') || '{}';
+                            var options = JSON.parse(optionsJson);
+                            var id = this.getAttribute('id');
+                            
+                            /*
+                             * 首次显示时实例化组件
+                             * 示例为了简洁，将 options 放在了按钮的 dom 上
+                             * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+                             */
+                            _self.picker = new $.DtPicker(options);
+                            _self.picker.show(function(rs) {
+                                /*
+                                 * rs.value 拼合后的 value
+                                 * rs.text 拼合后的 text
+                                 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+                                 * rs.m 月，用法同年
+                                 * rs.d 日，用法同年
+                                 * rs.h 时，用法同年
+                                 * rs.i 分（minutes 的第二个字母），用法同年
+                                 */
+                                result.innerText = rs.text;
+                                if (id=="policyDateofbirth1"){
+                                	policyDateofbirth1=rs.text;
+                                }
+                                if (id=="insuredDateofbirth1"){
+                                	insuredDateofbirth1=rs.text;
+                                }
+                                //var value=document.getElementById("duringtime").innerHTML.substring(0,1);
+                                //span.innerText=(parseInt(rs.y.value)+parseInt(value))+"-"+rs.m.value+"-"+rs.d.value;
+                                /* 
+                                 * 返回 false 可以阻止选择框的关闭
+                                 * return false;
+                                 */
+                                /*
+                                 * 释放组件资源，释放后将将不能再操作组件
+                                 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+                                 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+                                 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+                                 */
+                                _self.picker.dispose();
+                                _self.picker = null;
+
+                            });
+                        }
+
+
+
+
+
+                    }, false);
+                }
+
+
+            });
+
+
+        })(mui);
+   
+    	
+        // 只允许输入数字
+        function numericKeyup(obj) {
+            obj.value = obj.value.replace(/\D/g, '')
+        }
+
+        function idCardKeyup(obj, flagName) {
+        	
+            console.log(obj.value.length)
+            var $this = $(obj)
+            var thisVal = $this.val()
+            var thisText = $this.parent().prev().text()
+            var mt = flagName
+            if (thisVal.length == 18) {
+                $this.parent().parent().next('.tip').text('').hide()
+                if (!$.valid.isIdCard2(thisVal)) {
+                    $this.parent().parent().next('.tip').text(thisText + '不合法').show()
+                } else {
+                    $this.parent().parent().next('.tip').hide()
+                    $this.parent().parent().next('.tip').next().next('.tip').hide()
+                }
+            } else {
+                $this.parent().parent().next('.tip').text(thisText + '不合法').show()
+            }
+        }
+
+        function idPhoneKeyup(obj) {
+            // obj.value = obj.value.replace(/\D/g, '')
+            var $this = $(obj);
+            var thisVal = $this.val();
+            var thisText = $this.parent().prev().text()
+            if (thisVal.length == 11) {
+                if (!$.valid.isPhoneNumber(thisVal)) {
+                    $this.parent().parent().next('.tip').text(thisText + '不合法').show()
+                } else {
+                    $this.parent().parent().next('.tip').hide()
+                }
+            } else {
+                $this.parent().parent().next('.tip').text(thisText + '不合法').show()
+            }
+        }
+        
+        //判断投保人，被保人名称是否为空
+		function IsEmpty(obj){
+			var $this = $(obj);
+            var thisVal = $this.val();
+            var thisText = $this.prev().text();
+			if(thisVal.length==0){
+				//$(this).text($(this).prev().parent().next('.tip').find(".text").text() + '不合法').show()
+                $this.parent().parent().next('.tip').text(thisText + '不能为空').show()
+               
+			}else{
+				$this.parent().parent().next('.tip').hide()
+			}
+		}
+		
+		 //获取产品的id
+		function GetRequest() {
+		    var url = location.search; //获取url中"?"符后的字串
+		    var theRequest = new Object();
+		    if (url.indexOf("?") != -1) {
+		        var str = url.substr(1);
+		        strs = str.split("&");
+		        for (var i = 0; i < strs.length; i++) {
+		            theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+		        }
+		    }
+		    return theRequest;
+		}
+        
+//      $(function() {
+            $("#sureBtn").on("click", function() {
+                var flag = true;
+                $("body").find(".tip").each(function() {
+                	if(document.getElementById('policyName').value!=null&&document.getElementById('policyName').value!=""&&
+                	document.getElementById('policyCID').value!=null&&document.getElementById('policyCID').value!=""&&
+                	document.getElementById('policyPhone').value!=null&&document.getElementById('policyPhone').value!=""&&
+                	document.getElementById('insuredName').value!=null&&document.getElementById('insuredName').value!=""&&
+                	document.getElementById('insuredCID').value!=null&&document.getElementById('insuredCID').value!=""&&
+                	document.getElementById('insuredPhone').value!=null&&document.getElementById('insuredPhone').value!=""){
+//              		alert("buweik");
+                		$(this).css('display','none');
+                	}
+                    if ($(this).css("display")) {
+                        if ($(this).css("display") == "none") {
+                            console.log("通过")
+                        } else {
+                        	
+                            flag = false;
+                            console.log("不通过")
+                            if($(this).prev().find(".text").text()=="姓名"){
+                            	$(this).text($(this).prev().find(".text").text() + '不能为空').show()
+                            }else{
+                            	$(this).text($(this).prev().find(".text").text() + '不合法').show()
+                            }
+                        }
+                    } else {
+                        console.log('不合格');
+                    }
+                })
+                
+              /*alert(flag);*/
+                if (flag) {
+                    var insurProductsName=document.getElementById('insurProductsName').value;
+					var duringtime=document.getElementById("duringtime").innerHTML;
+					var policyName=document.getElementById('policyName').value;
+					var policyCID=document.getElementById('policyCID').value;
+					var policyPhone=document.getElementById('policyPhone').value;
+					var insuredName=document.getElementById('insuredName').value;
+					var insuredCID=document.getElementById('insuredCID').value;
+					var insuredPhone=document.getElementById('insuredPhone').value;
+					var travelStart=document.getElementById('travelStart').value;
+					var travelDestnation=document.getElementById('travelDestnation').value;
+					var travelTime=document.getElementById('travelTime').value;
+//					var sexP=document.getElementsByName("sexP");
+					var sexP=$('input[name="sexP"]:checked').val(); 
+					var sexS=$('input[name="sexS"]:checked').val(); 
+					/*alert("startTime="+startTime);*/
+					var postData1={
+						productId:ID['productId'],
+						premium:Premium,
+						takeEffectTime1:startTime,
+						duringTime:"1年",
+						invalidTime1:stopTime,
+						policyName:policyName,
+						policyType:policyType,
+						policyCID:policyCID,
+						policyDateofbirth1:policyDateofbirth1,
+						policySex:sexP,
+						policyPhone:policyPhone,
+						insuredName:insuredName,
+						insuredType:insuredType,
+						insuredCID:insuredCID,
+						insuredDateofbirth1:insuredDateofbirth1,
+						insuredSex:sexS,
+						insuredPhone:insuredPhone,
+						relation:relation,
+						travelStart:travelStart,
+						travelDestnation:travelDestnation,
+						travelTime:travelTime
+					};
+					
+					mui.ajax({
+		                url: httpLocation2+"/tpwb/order/insertOrder",
+		                type: 'POST',
+		                data: JSON.stringify(postData1),
+		                contentType: "application/json;charset=utf-8",
+		                dataType: 'json',
+		                success: function(backdata) {
+	                	    window.location.href="orderPay.html?OrderId="+backdata.data.orderId;
+	               		}
+					})
+                }
+            })
+//      })
+ 
+       
+        
+		
+    </script>
+
+</body>
+
+</html>
